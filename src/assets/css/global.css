@@ -463,12 +463,37 @@ ul, ol {
 
 .hero__arrow {
   color: #fff;
-  opacity: 0.8;
-  transition: opacity var(--transition-base);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  width: 160px;
+  height: 160px;
+  max-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  background-color: transparent;
+  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
 }
 
 .hero__arrow:hover {
-  opacity: 1;
+  transform: translate3d(0px, 0px, 0px) scale3d(1.5, 1.5, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  border-color: #fff;
+}
+
+.hero__arrow.swiper-button-prev {
+  inset: 50% 0% 0% -50px;
+}
+
+.hero__arrow.swiper-button-next {
+  inset: 50% -50px 0% auto
+}
+
+.hero__arrow::after {
+  font-size: 40px;
+  font-weight: 300;
+  color: #fff;
 }
 
 /* ========================
@@ -955,21 +980,39 @@ ul, ol {
   .booking-quiz__card {
     max-width: 100%;
   }
+
+  .hero__arrow {
+    width: 100px;
+    height: 100px;
+    max-height: 100px;
+  }
+
+  .hero__arrow::after {
+    font-size: 30px;
+  }
+
+  .hero__arrow.swiper-button-prev {
+    left: 15px;
+  }
+
+  .hero__arrow.swiper-button-next {
+    right: 15px;
+  }
 }
 
 @media (max-width: 768px) {
   .nav__center {
     display: none;
   }
-  
+
   .nav__toggle {
     display: flex;
   }
-  
+
   .nav__btn {
     display: none;
   }
-  
+
   .nav__menu {
     position: fixed;
     top: 70px;
@@ -985,19 +1028,23 @@ ul, ol {
     visibility: hidden;
     transition: all var(--transition-base);
   }
-  
+
   .nav__menu--active {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-  
+
   .quiz-step__options {
     grid-template-columns: 1fr;
   }
-  
+
   .dish-card__image {
     height: 200px;
+  }
+
+  .hero__arrow {
+    display: none;
   }
 }
 
