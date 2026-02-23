@@ -330,6 +330,10 @@ ul, ol {
 .nav__btn {
   display: inline-block;
   white-space: nowrap;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
 }
 
 .nav__toggle {
