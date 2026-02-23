@@ -3,6 +3,9 @@
  * Точка входа для всех скриптов
  */
 
+// ===== Import Modules =====
+import { initFormValidation, validateContactFields, validateName, validatePhone, validateEmail, sanitizePhone, sanitizeName } from './validation.js';
+
 // ===== DOM Ready =====
 document.addEventListener('DOMContentLoaded', () => {
   console.log('The Global Table by KG - Application initialized');
@@ -11,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initMobileMenu();
   initHeroSlider();
+  initFormValidation();
   initBookingQuiz();
   initGallery();
   initCurrentYear();
@@ -259,8 +263,27 @@ function initBookingQuiz() {
   // Validate current step
   function validateStep() {
     const currentStepEl = quizSteps[currentStep];
-    const inputs = currentStepEl.querySelectorAll('input[required], textarea[required], select[required]');
 
+    // Step 1: Validate date is weekend and dinner is selected
+    if (currentStep === 0) {
+      if (!quizDateInput.value) {
+        return false;
+      }
+      if (!isWeekend(quizDateInput.value)) {
+        return false;
+      }
+      if (!selectedDinner) {
+        return false;
+      }
+    }
+
+    // Step 2: Validate contact fields using validation module
+    if (currentStep === 1) {
+      return validateContactFields();
+    }
+
+    // Step 3 & 4: Validate required fields
+    const inputs = currentStepEl.querySelectorAll('input[required], textarea[required], select[required]');
     for (let input of inputs) {
       if (input.type === 'radio') {
         const radioGroup = currentStepEl.querySelectorAll(`input[name="${input.name}"]`);
@@ -273,29 +296,6 @@ function initBookingQuiz() {
           return false;
         }
       } else if (!input.value.trim()) {
-        return false;
-      }
-    }
-
-    // Validate pattern for text inputs
-    const textInputs = currentStepEl.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"]');
-    for (let input of textInputs) {
-      if (input.hasAttribute('required') && input.value.trim()) {
-        if (input.pattern && !new RegExp(input.pattern).test(input.value)) {
-          return false;
-        }
-      }
-    }
-
-    // Step 1: Validate date is weekend and dinner is selected
-    if (currentStep === 0) {
-      if (!quizDateInput.value) {
-        return false;
-      }
-      if (!isWeekend(quizDateInput.value)) {
-        return false;
-      }
-      if (!selectedDinner) {
         return false;
       }
     }
@@ -358,13 +358,23 @@ function initBookingQuiz() {
   quizForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // Validate contact fields before submit
+    validateContactFields();
+
     if (validateStep()) {
       // Collect and sanitize form data
       const formData = new FormData(quizForm);
       const data = {};
 
       for (let [key, value] of formData.entries()) {
-        data[key] = sanitizeInput(value);
+        // Use specific sanitizers for specific fields
+        if (key === 'phone') {
+          data[key] = sanitizePhone(value);
+        } else if (key === 'name') {
+          data[key] = sanitizeName(value);
+        } else {
+          data[key] = sanitizeInput(value);
+        }
       }
 
       console.log('Booking data:', data);

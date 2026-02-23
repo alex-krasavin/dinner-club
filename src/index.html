@@ -290,15 +290,18 @@
               <h3 class="quiz-step__title">Step 2: Your Contact Info</h3>
               <div class="form__group">
                 <label for="quiz-name" class="form__label">Full name *</label>
-                <input type="text" class="form__input" id="quiz-name" name="name" required pattern="[A-Za-zА-Яа-я\s\-]+" title="Only letters, spaces, and hyphens">
+                <input type="text" class="form__input" id="quiz-name" name="name" required placeholder="e.g. John Smith">
+                <p class="form__error hidden" id="name-error">Only Latin letters, spaces, and hyphens allowed</p>
               </div>
               <div class="form__group">
                 <label for="quiz-phone" class="form__label">Phone (WhatsApp/Telegram) *</label>
-                <input type="tel" class="form__input" id="quiz-phone" name="phone" required pattern="^[\+\d\s\-\(\)]{8,20}$" title="Enter a valid phone number">
+                <input type="tel" class="form__input" id="quiz-phone" name="phone" required placeholder="+66 12 345 6789">
+                <p class="form__error hidden" id="phone-error">Enter a valid phone number (8-20 digits)</p>
               </div>
               <div class="form__group">
                 <label for="quiz-email" class="form__label">Email (optional)</label>
-                <input type="email" class="form__input" id="quiz-email" name="email">
+                <input type="email" class="form__input" id="quiz-email" name="email" placeholder="example@email.com">
+                <p class="form__error hidden" id="email-error">Enter a valid email address</p>
               </div>
             </div>
 

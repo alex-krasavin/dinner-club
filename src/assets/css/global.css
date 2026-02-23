@@ -192,6 +192,20 @@ ul, ol {
   display: none;
 }
 
+.form__error {
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+  margin-top: var(--spacing-sm);
+}
+
+.form__error--hidden {
+  display: none;
+}
+
+.form__input--error {
+  border-color: var(--color-secondary);
+}
+
 /* ========================
    Header
    ======================== */
