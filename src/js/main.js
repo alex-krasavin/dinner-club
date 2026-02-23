@@ -157,12 +157,12 @@ function initBookingQuiz() {
     return value.replace(/[<>\"'&]/g, '').trim();
   }
 
-  // Check if date is weekend (Friday=5, Saturday=6, Sunday=0)
+  // Check if date is weekend (Saturday=6, Sunday=0)
   function isWeekend(dateString) {
     if (!dateString) return false;
     const date = new Date(dateString);
     const day = date.getDay();
-    return day === 0 || day === 5 || day === 6;
+    return day === 0 || day === 6;
   }
 
   // Get dinner by date (mock function - will be replaced by API call)
