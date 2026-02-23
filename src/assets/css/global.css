@@ -732,56 +732,63 @@ ul, ol {
   color: var(--color-text);
 }
 
-.quiz-step__input {
-  margin-bottom: var(--spacing-lg);
+/* ===== Form Hint ===== */
+.form__hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin-top: var(--spacing-sm);
 }
 
-.quiz-step__options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* ===== Dinner Info ===== */
+.dinner-info {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-accent);
+}
+
+.dinner-info__header {
+  display: flex;
+  align-items: center;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
 }
 
-.quiz-option {
-  cursor: pointer;
+.dinner-info__flag {
+  font-size: 3rem;
 }
 
-.quiz-option__input {
-  position: absolute;
-  opacity: 0;
+.dinner-info__title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-xs);
 }
 
-.quiz-option__card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-lg);
-  background-color: var(--color-bg-white);
-  border: 2px solid var(--color-accent);
-  border-radius: var(--border-radius-md);
-  transition: all var(--transition-base);
+.dinner-info__date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
 }
 
-.quiz-option__input:checked + .quiz-option__card {
-  border-color: var(--color-primary);
-  background-color: rgba(193, 124, 94, 0.1);
-}
-
-.quiz-option__card:hover {
-  border-color: var(--color-primary);
-}
-
-.quiz-option__flag {
-  font-size: 2.5rem;
-}
-
-.quiz-option__name {
-  font-weight: 500;
+.dinner-info__menu-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
   color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
 }
+
+.dinner-info__menu-list {
+  list-style: disc;
+  padding-left: var(--spacing-lg);
+  color: var(--color-text-light);
+}
+
+.dinner-info__menu-list li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* ===== Quiz Step Options (removed - kept for backward compatibility) ===== */
 
 .quiz-step__nav {
   display: flex;

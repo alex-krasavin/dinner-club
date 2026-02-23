@@ -105,16 +105,128 @@ function initBookingQuiz() {
   const allergiesYes = document.getElementById('allergies-yes');
   const allergiesNo = document.getElementById('allergies-no');
   const allergyDetailsGroup = document.getElementById('allergy-details-group');
+  const quizDateInput = document.getElementById('quiz-date');
+  const dinnerInfo = document.getElementById('dinner-info');
+  const dinnerFlag = document.getElementById('dinner-flag');
+  const dinnerTitle = document.getElementById('dinner-title');
+  const dinnerDateDisplay = document.getElementById('dinner-date-display');
+  const dinnerMenuList = document.getElementById('dinner-menu-list');
+  const dinnerIdInput = document.getElementById('dinner-id');
 
   if (!quizForm || !quizSteps.length) return;
 
   let currentStep = 0;
   const totalSteps = quizSteps.length;
+  let selectedDinner = null;
+
+  // Static dinner data (will be replaced by backend API)
+  const dinnersData = [
+    {
+      id: 1,
+      country: 'italy',
+      flag: '🇮🇹',
+      title: 'Italian Night',
+      menu: ['Bruschetta with tomatoes and basil', 'Pasta Carbonara', 'Tiramisu']
+    },
+    {
+      id: 2,
+      country: 'india',
+      flag: '🇮🇳',
+      title: 'Indian Spice Journey',
+      menu: ['Samosa with mint chutney', 'Butter Chicken with naan', 'Gulab Jamun']
+    },
+    {
+      id: 3,
+      country: 'thailand',
+      flag: '🇹🇭',
+      title: 'Thai Flavors',
+      menu: ['Tom Yum soup', 'Pad Thai with shrimp', 'Mango with sticky rice']
+    },
+    {
+      id: 4,
+      country: 'georgia',
+      flag: '🇬🇪',
+      title: 'Georgian Feast',
+      menu: ['Khachapuri Adjaruli', 'Khinkali with meat', 'Badrijani with walnut paste']
+    }
+  ];
 
   // Sanitize input - allow only safe characters
   function sanitizeInput(value) {
     if (!value) return '';
     return value.replace(/[<>\"'&]/g, '').trim();
+  }
+
+  // Check if date is weekend (Friday=5, Saturday=6, Sunday=0)
+  function isWeekend(dateString) {
+    if (!dateString) return false;
+    const date = new Date(dateString);
+    const day = date.getDay();
+    return day === 0 || day === 5 || day === 6;
+  }
+
+  // Get dinner by date (mock function - will be replaced by API call)
+  function getDinnerByDate(dateString) {
+    // Mock logic: rotate dinners based on week number
+    const date = new Date(dateString);
+    const weekNumber = Math.floor(date.getDate() / 7);
+    const dinnerIndex = weekNumber % dinnersData.length;
+    return dinnersData[dinnerIndex];
+  }
+
+  // Format date for display
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
+
+  // Render dinner info
+  function renderDinnerInfo(dinner) {
+    if (!dinner || !quizDateInput.value) return;
+    
+    dinnerFlag.textContent = dinner.flag;
+    dinnerTitle.textContent = dinner.title;
+    dinnerDateDisplay.textContent = formatDate(quizDateInput.value);
+    dinnerMenuList.innerHTML = dinner.menu
+      .map(item => `<li>${item}</li>`)
+      .join('');
+    dinnerIdInput.value = dinner.id;
+    
+    dinnerInfo.classList.remove('hidden');
+  }
+
+  // Date input change handler
+  function handleDateChange() {
+    const dateValue = quizDateInput.value;
+    
+    if (!dateValue) {
+      dinnerInfo.classList.add('hidden');
+      selectedDinner = null;
+      return;
+    }
+    
+    // Validate weekend
+    if (!isWeekend(dateValue)) {
+      dinnerInfo.classList.add('hidden');
+      selectedDinner = null;
+      // Show error animation on input
+      quizDateInput.style.animation = 'shake 0.4s ease';
+      setTimeout(() => {
+        quizDateInput.style.animation = '';
+      }, 400);
+      return;
+    }
+    
+    // Load dinner data
+    selectedDinner = getDinnerByDate(dateValue);
+    if (selectedDinner) {
+      renderDinnerInfo(selectedDinner);
+    }
   }
 
   function updateStep() {
@@ -175,15 +287,28 @@ function initBookingQuiz() {
       }
     }
 
+    // Step 1: Validate date is weekend and dinner is selected
+    if (currentStep === 0) {
+      if (!quizDateInput.value) {
+        return false;
+      }
+      if (!isWeekend(quizDateInput.value)) {
+        return false;
+      }
+      if (!selectedDinner) {
+        return false;
+      }
+    }
+
     return true;
   }
 
   // Show error animation
-  function showErrorAnimation() {
-    const currentStepEl = quizSteps[currentStep];
-    currentStepEl.style.animation = 'shake 0.4s ease';
+  function showErrorAnimation(element) {
+    const target = element || quizSteps[currentStep];
+    target.style.animation = 'shake 0.4s ease';
     setTimeout(() => {
-      currentStepEl.style.animation = '';
+      target.style.animation = '';
     }, 400);
   }
 
@@ -224,6 +349,11 @@ function initBookingQuiz() {
     });
   }
 
+  // Handle date change
+  if (quizDateInput) {
+    quizDateInput.addEventListener('change', handleDateChange);
+  }
+
   // Form submission
   quizForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -232,7 +362,7 @@ function initBookingQuiz() {
       // Collect and sanitize form data
       const formData = new FormData(quizForm);
       const data = {};
-      
+
       for (let [key, value] of formData.entries()) {
         data[key] = sanitizeInput(value);
       }
@@ -246,10 +376,14 @@ function initBookingQuiz() {
       // Reset to first step after delay
       setTimeout(() => {
         currentStep = 0;
+        selectedDinner = null;
         updateStep();
         quizSuccess.classList.add('form__success--hidden');
         if (allergyDetailsGroup) {
           allergyDetailsGroup.style.display = 'none';
+        }
+        if (dinnerInfo) {
+          dinnerInfo.classList.add('hidden');
         }
       }, 3000);
     } else {

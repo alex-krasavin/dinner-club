@@ -256,45 +256,32 @@
           <h2 class="booking-quiz__title">Book a Table</h2>
 
           <form class="booking-quiz__form" id="booking-quiz-form" novalidate>
-            <!-- Step 1: Date and Cuisine -->
+            <!-- Step 1: Date and Dinner Info -->
             <div class="quiz-step quiz-step--active" data-step="1" data-bg="./assets/images/booking/step1-bg.jpg">
               <h3 class="quiz-step__title">Step 1: Choose Your Dinner</h3>
               <div class="form__group">
                 <label for="quiz-date" class="form__label">Select date *</label>
                 <input type="date" class="form__input" id="quiz-date" name="date" required>
+                <p class="form__hint">Available dates: Fridays, Saturdays, Sundays</p>
               </div>
-              <div class="form__group">
-                <label class="form__label">Select cuisine *</label>
-                <div class="quiz-step__options">
-                  <label class="quiz-option">
-                    <input type="radio" name="cuisine" value="italy" class="quiz-option__input" required>
-                    <span class="quiz-option__card">
-                      <span class="quiz-option__flag">🇮🇹</span>
-                      <span class="quiz-option__name">Italy</span>
-                    </span>
-                  </label>
-                  <label class="quiz-option">
-                    <input type="radio" name="cuisine" value="india" class="quiz-option__input" required>
-                    <span class="quiz-option__card">
-                      <span class="quiz-option__flag">🇮🇳</span>
-                      <span class="quiz-option__name">India</span>
-                    </span>
-                  </label>
-                  <label class="quiz-option">
-                    <input type="radio" name="cuisine" value="thailand" class="quiz-option__input" required>
-                    <span class="quiz-option__card">
-                      <span class="quiz-option__flag">🇹🇭</span>
-                      <span class="quiz-option__name">Thailand</span>
-                    </span>
-                  </label>
-                  <label class="quiz-option">
-                    <input type="radio" name="cuisine" value="georgia" class="quiz-option__input" required>
-                    <span class="quiz-option__card">
-                      <span class="quiz-option__flag">🇬🇪</span>
-                      <span class="quiz-option__name">Georgia</span>
-                    </span>
-                  </label>
+              
+              <!-- Dinner info (loaded after date selection) -->
+              <div class="dinner-info hidden" id="dinner-info">
+                <div class="dinner-info__header">
+                  <span class="dinner-info__flag" id="dinner-flag">🇮🇹</span>
+                  <div class="dinner-info__text">
+                    <h4 class="dinner-info__title" id="dinner-title">Italian Night</h4>
+                    <p class="dinner-info__date" id="dinner-date-display"></p>
+                  </div>
                 </div>
+                <div class="dinner-info__menu">
+                  <p class="dinner-info__menu-title">Menu highlights:</p>
+                  <ul class="dinner-info__menu-list" id="dinner-menu-list">
+                    <!-- Menu items loaded dynamically -->
+                  </ul>
+                </div>
+                <!-- Hidden input to store selected dinner ID -->
+                <input type="hidden" id="dinner-id" name="dinner_id">
               </div>
             </div>
 
