@@ -93,9 +93,10 @@
     ======================== -->
     <section class="hero" id="hero">
       <div class="swiper hero__swiper">
-        <div class="swiper-wrapper">
-          <!-- Slide 1 -->
-          <div class="swiper-slide hero__slide">
+        <div class="swiper-wrapper" id="hero-slides-wrapper">
+          <!-- Slides will be loaded dynamically from API -->
+          <!-- Fallback static slides -->
+          <div class="swiper-slide hero__slide" data-image="./assets/images/hero/hero-1.jpg">
             <div class="hero__overlay"></div>
             <div class="hero__content container">
               <h1 class="hero__title">A Journey of Flavors</h1>
@@ -104,8 +105,7 @@
             </div>
           </div>
 
-          <!-- Slide 2 -->
-          <div class="swiper-slide hero__slide">
+          <div class="swiper-slide hero__slide" data-image="./assets/images/hero/hero-2.jpg">
             <div class="hero__overlay"></div>
             <div class="hero__content container">
               <h1 class="hero__title">New Cuisine Every Week</h1>
@@ -114,8 +114,7 @@
             </div>
           </div>
 
-          <!-- Slide 3 -->
-          <div class="swiper-slide hero__slide">
+          <div class="swiper-slide hero__slide" data-image="./assets/images/hero/hero-3.jpg">
             <div class="hero__overlay"></div>
             <div class="hero__content container">
               <h1 class="hero__title">Up to 15 Guests</h1>

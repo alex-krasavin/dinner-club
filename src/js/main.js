@@ -5,6 +5,7 @@
 
 // ===== Import Modules =====
 import { initFormValidation, validateContactFields, validateName, validatePhone, validateEmail, sanitizePhone, sanitizeName } from './validation.js';
+import { getHeroSlides, getDinnerByDate } from './api.js';
 
 // ===== DOM Ready =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,11 +15,51 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initMobileMenu();
   initHeroSlider();
+  loadHeroSlides();
   initFormValidation();
   initBookingQuiz();
   initGallery();
   initCurrentYear();
 });
+
+// ===== Load Hero Slides from API =====
+async function loadHeroSlides() {
+  const slidesWrapper = document.getElementById('hero-slides-wrapper');
+  if (!slidesWrapper) return;
+
+  try {
+    const slides = await getHeroSlides();
+    
+    // Clear existing slides
+    slidesWrapper.innerHTML = '';
+    
+    // Create slides from API data
+    slides.forEach((slide, index) => {
+      const slideEl = document.createElement('div');
+      slideEl.className = 'swiper-slide hero__slide';
+      slideEl.setAttribute('data-image', slide.image);
+      slideEl.style.backgroundImage = `url('${slide.image}')`;
+      
+      slideEl.innerHTML = `
+        <div class="hero__overlay"></div>
+        <div class="hero__content container">
+          <h1 class="hero__title">${slide.title}</h1>
+          <p class="hero__subtitle">${slide.subtitle}</p>
+          <a href="#booking-quiz" class="btn btn--primary btn--large">Book a Table</a>
+        </div>
+      `;
+      
+      slidesWrapper.appendChild(slideEl);
+    });
+    
+    // Re-initialize Swiper after loading slides
+    if (window.heroSwiperInstance) {
+      window.heroSwiperInstance.update();
+    }
+  } catch (error) {
+    console.error('Failed to load hero slides:', error);
+  }
+}
 
 // ===== Header Scroll Effect =====
 function initHeaderScroll() {
@@ -95,6 +136,9 @@ function initHeroSlider() {
       crossFade: true,
     },
   });
+  
+  // Save instance for later updates
+  window.heroSwiperInstance = heroSwiper;
 }
 
 // ===== Booking Quiz =====
@@ -169,13 +213,9 @@ function initBookingQuiz() {
     return day === 0 || day === 6;
   }
 
-  // Get dinner by date (mock function - will be replaced by API call)
-  function getDinnerByDate(dateString) {
-    // Mock logic: rotate dinners based on week number
-    const date = new Date(dateString);
-    const weekNumber = Math.floor(date.getDate() / 7);
-    const dinnerIndex = weekNumber % dinnersData.length;
-    return dinnersData[dinnerIndex];
+  // Get dinner by date from API
+  async function fetchDinnerByDate(dateString) {
+    return await getDinnerByDate(dateString);
   }
 
   // Format date for display
@@ -205,15 +245,15 @@ function initBookingQuiz() {
   }
 
   // Date input change handler
-  function handleDateChange() {
+  async function handleDateChange() {
     const dateValue = quizDateInput.value;
-    
+
     if (!dateValue) {
       dinnerInfo.classList.add('hidden');
       selectedDinner = null;
       return;
     }
-    
+
     // Validate weekend
     if (!isWeekend(dateValue)) {
       dinnerInfo.classList.add('hidden');
@@ -225,9 +265,9 @@ function initBookingQuiz() {
       }, 400);
       return;
     }
-    
-    // Load dinner data
-    selectedDinner = getDinnerByDate(dateValue);
+
+    // Load dinner data from API
+    selectedDinner = await fetchDinnerByDate(dateValue);
     if (selectedDinner) {
       renderDinnerInfo(selectedDinner);
     }
