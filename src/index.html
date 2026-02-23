@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Global Table by KG - Gastronomic dinners on Phuket. Experience authentic home cuisine from around the world.">
+  <meta name="keywords" content="Phuket, dinner, gastronomy, international cuisine, expat community">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Global Table by KG">
+  <meta property="og:description" content="Gastronomic dinners on Phuket. Experience authentic home cuisine from around the world.">
+  
+  <title>The Global Table by KG</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="./assets/css/global.css">
+</head>
+<body>
+  
+  <!-- ========================
+       Header Section
+  ======================== -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="nav__logo">
+          The Global Table
+        </a>
+        
+        <ul class="nav__menu" id="nav-menu">
+          <li class="nav__item">
+            <a href="#about" class="nav__link">About</a>
+          </li>
+          <li class="nav__item">
+            <a href="#how-it-works" class="nav__link">How It Works</a>
+          </li>
+          <li class="nav__item">
+            <a href="#dinners" class="nav__link">Dinners</a>
+          </li>
+          <li class="nav__item">
+            <a href="#gallery" class="nav__link">Gallery</a>
+          </li>
+          <li class="nav__item">
+            <a href="#contact" class="nav__link">Contact</a>
+          </li>
+        </ul>
+        
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span class="nav__toggle-icon"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- ========================
+         Hero Section
+    ======================== -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <h1 class="hero__title">
+          The Global Table <span class="hero__title-accent">by KG</span>
+        </h1>
+        <p class="hero__subtitle">
+          Where strangers become friends over homemade cuisine from around the world
+        </p>
+        <a href="#dinners" class="hero__btn btn">
+          Book a Table
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================
+         About Section
+    ======================== -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section__title">About the Project</h2>
+        <div class="about__content">
+          <p class="about__text">
+            The Global Table is more than just dinner — it's a community where expats, 
+            digital nomads, and locals come together to share stories, cultures, and 
+            authentic homemade cuisine.
+          </p>
+          <p class="about__text">
+            Every weekend, we transform our space into a culinary journey to a different 
+            country. Experience the warmth of home cooking and the joy of meaningful 
+            connections.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         How It Works Section
+    ======================== -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <h2 class="section__title">How It Works</h2>
+        <div class="how-it-works__steps">
+          <div class="step">
+            <div class="step__number">1</div>
+            <h3 class="step__title">Choose a Dinner</h3>
+            <p class="step__description">
+              Browse upcoming themed dinners and select the cuisine you'd like to experience.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step__number">2</div>
+            <h3 class="step__title">Book Your Spot</h3>
+            <p class="step__description">
+              Reserve your seat at our communal table (up to 15 guests for an intimate experience).
+            </p>
+          </div>
+          <div class="step">
+            <div class="step__number">3</div>
+            <h3 class="step__title">Connect & Enjoy</h3>
+            <p class="step__description">
+              Meet new friends, share stories, and savor authentic homemade dishes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         Dinners / Menu Section
+    ======================== -->
+    <section class="dinners" id="dinners">
+      <div class="container">
+        <h2 class="section__title">Upcoming Dinners</h2>
+        
+        <!-- Country Cards -->
+        <div class="country-selector" id="country-selector">
+          <!-- Cards will be populated dynamically -->
+        </div>
+        
+        <!-- Menu Slider (changes based on selected country) -->
+        <div class="menu-slider" id="menu-slider">
+          <div class="swiper menu-swiper">
+            <div class="swiper-wrapper">
+              <!-- Slides will be populated dynamically -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         Gallery Section
+    ======================== -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <h2 class="section__title">Gallery</h2>
+        <div class="gallery-slider">
+          <div class="swiper gallery-swiper">
+            <div class="swiper-wrapper">
+              <!-- Gallery slides will be populated dynamically -->
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         Booking Form Section
+    ======================== -->
+    <section class="booking" id="booking">
+      <div class="container">
+        <h2 class="section__title">Book Your Table</h2>
+        
+        <form class="booking__form" id="booking-form" novalidate>
+          <!-- Name -->
+          <div class="form__group">
+            <label for="name" class="form__label">Name *</label>
+            <input type="text" id="name" name="name" class="form__input" required>
+          </div>
+          
+          <!-- Phone -->
+          <div class="form__group">
+            <label for="phone" class="form__label">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" class="form__input" required>
+          </div>
+          
+          <!-- Contact Method -->
+          <div class="form__group">
+            <span class="form__label">Preferred Contact Method</span>
+            <div class="form__checkboxes">
+              <label class="checkbox">
+                <input type="checkbox" name="contact_method" value="whatsapp">
+                <span>WhatsApp</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="contact_method" value="telegram">
+                <span>Telegram</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="contact_method" value="email">
+                <span>Email</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="contact_method" value="call">
+                <span>Phone Call</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Allergies -->
+          <div class="form__group">
+            <span class="form__label">Do you have any allergies or dietary restrictions?</span>
+            <div class="form__radio-group">
+              <label class="radio">
+                <input type="radio" name="allergies" value="no" checked>
+                <span>No</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="allergies" value="yes">
+                <span>Yes</span>
+              </label>
+            </div>
+            <textarea id="allergies-comment" name="allergies_comment" class="form__textarea form__textarea--hidden" placeholder="Please describe your allergies or dietary restrictions"></textarea>
+          </div>
+          
+          <!-- About You -->
+          <div class="form__group">
+            <label for="about" class="form__label">Tell us a bit about yourself *</label>
+            <textarea id="about" name="about" class="form__textarea" required placeholder="Share what brings you to The Global Table..."></textarea>
+          </div>
+          
+          <!-- Dinner Selection -->
+          <div class="form__group">
+            <label for="dinner-select" class="form__label">Select a Dinner *</label>
+            <select id="dinner-select" name="dinner" class="form__select" required>
+              <option value="">Choose an upcoming dinner...</option>
+              <!-- Options will be populated dynamically -->
+            </select>
+          </div>
+          
+          <!-- Submit Button -->
+          <button type="submit" class="booking__submit btn">
+            Submit Booking Request
+          </button>
+          
+          <!-- Success Message (hidden by default) -->
+          <div class="form__success form__success--hidden" id="form-success">
+            <p>Thank you! Your booking request has been received. We'll contact you soon to confirm.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========================
+         Contact Section
+    ======================== -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section__title">Get in Touch</h2>
+        <div class="contact__content">
+          <p class="contact__text">
+            Have questions? Reach out to us on social media or via email.
+          </p>
+          <div class="contact__links">
+            <a href="#" class="contact__link" target="_blank" rel="noopener">Instagram</a>
+            <a href="#" class="contact__link" target="_blank" rel="noopener">TikTok</a>
+            <a href="#" class="contact__link" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================
+       Footer
+  ======================== -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">
+        &copy; <span id="current-year">2026</span> The Global Table by KG. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <!-- Main Script -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
