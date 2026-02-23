@@ -102,12 +102,21 @@ function initBookingQuiz() {
   const submitBtn = document.getElementById('quiz-submit');
   const quizSuccess = document.getElementById('quiz-success');
   const bookingBg = document.getElementById('booking-bg');
-  
+  const allergiesYes = document.getElementById('allergies-yes');
+  const allergiesNo = document.getElementById('allergies-no');
+  const allergyDetailsGroup = document.getElementById('allergy-details-group');
+
   if (!quizForm || !quizSteps.length) return;
-  
+
   let currentStep = 0;
   const totalSteps = quizSteps.length;
-  
+
+  // Sanitize input - allow only safe characters
+  function sanitizeInput(value) {
+    if (!value) return '';
+    return value.replace(/[<>\"'&]/g, '').trim();
+  }
+
   function updateStep() {
     // Show/hide steps
     quizSteps.forEach((step, index) => {
@@ -122,10 +131,10 @@ function initBookingQuiz() {
         step.classList.remove('quiz-step--active');
       }
     });
-    
+
     // Update buttons
     prevBtn.disabled = currentStep === 0;
-    
+
     if (currentStep === totalSteps - 1) {
       nextBtn.classList.add('hidden');
       submitBtn.classList.remove('hidden');
@@ -134,12 +143,12 @@ function initBookingQuiz() {
       submitBtn.classList.add('hidden');
     }
   }
-  
+
   // Validate current step
   function validateStep() {
     const currentStepEl = quizSteps[currentStep];
-    const inputs = currentStepEl.querySelectorAll('input[required]');
-    
+    const inputs = currentStepEl.querySelectorAll('input[required], textarea[required], select[required]');
+
     for (let input of inputs) {
       if (input.type === 'radio') {
         const radioGroup = currentStepEl.querySelectorAll(`input[name="${input.name}"]`);
@@ -147,29 +156,47 @@ function initBookingQuiz() {
         if (!isChecked) {
           return false;
         }
+      } else if (input.type === 'checkbox') {
+        if (!input.checked) {
+          return false;
+        }
       } else if (!input.value.trim()) {
         return false;
       }
     }
-    
+
+    // Validate pattern for text inputs
+    const textInputs = currentStepEl.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"]');
+    for (let input of textInputs) {
+      if (input.hasAttribute('required') && input.value.trim()) {
+        if (input.pattern && !new RegExp(input.pattern).test(input.value)) {
+          return false;
+        }
+      }
+    }
+
     return true;
   }
-  
+
+  // Show error animation
+  function showErrorAnimation() {
+    const currentStepEl = quizSteps[currentStep];
+    currentStepEl.style.animation = 'shake 0.4s ease';
+    setTimeout(() => {
+      currentStepEl.style.animation = '';
+    }, 400);
+  }
+
   // Next button click
   nextBtn.addEventListener('click', () => {
     if (validateStep() && currentStep < totalSteps - 1) {
       currentStep++;
       updateStep();
     } else {
-      // Visual feedback for validation error
-      const currentStepEl = quizSteps[currentStep];
-      currentStepEl.style.animation = 'shake 0.4s ease';
-      setTimeout(() => {
-        currentStepEl.style.animation = '';
-      }, 400);
+      showErrorAnimation();
     }
   });
-  
+
   // Previous button click
   prevBtn.addEventListener('click', () => {
     if (currentStep > 0) {
@@ -177,31 +204,59 @@ function initBookingQuiz() {
       updateStep();
     }
   });
-  
+
+  // Handle allergies toggle
+  if (allergiesYes && allergiesNo && allergyDetailsGroup) {
+    allergiesYes.addEventListener('change', () => {
+      if (allergiesYes.checked) {
+        allergyDetailsGroup.style.display = 'block';
+      }
+    });
+
+    allergiesNo.addEventListener('change', () => {
+      if (allergiesNo.checked) {
+        allergyDetailsGroup.style.display = 'none';
+        const allergyDetails = document.getElementById('allergy-details');
+        if (allergyDetails) {
+          allergyDetails.value = '';
+        }
+      }
+    });
+  }
+
   // Form submission
   quizForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     if (validateStep()) {
-      // Collect form data
+      // Collect and sanitize form data
       const formData = new FormData(quizForm);
-      const data = Object.fromEntries(formData.entries());
+      const data = {};
       
+      for (let [key, value] of formData.entries()) {
+        data[key] = sanitizeInput(value);
+      }
+
       console.log('Booking data:', data);
-      
+
       // Show success message
       quizForm.reset();
       quizSuccess.classList.remove('form__success--hidden');
-      
+
       // Reset to first step after delay
       setTimeout(() => {
         currentStep = 0;
         updateStep();
         quizSuccess.classList.add('form__success--hidden');
+        if (allergyDetailsGroup) {
+          allergyDetailsGroup.style.display = 'none';
+        }
       }, 3000);
+    } else {
+      showErrorAnimation();
     }
   });
-  
+
   // Initialize
   updateStep();
 }

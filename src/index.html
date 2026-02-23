@@ -256,57 +256,98 @@
           <h2 class="booking-quiz__title">Book a Table</h2>
 
           <form class="booking-quiz__form" id="booking-quiz-form" novalidate>
-            <!-- Question 1: Date -->
-            <div class="quiz-step quiz-step--active" data-step="1" data-bg="./assets/images/booking/date.jpg">
-              <h3 class="quiz-step__title">Select a Date</h3>
-              <input type="date" class="form__input quiz-step__input" id="quiz-date" name="date" required>
-            </div>
-
-            <!-- Question 2: Cuisine -->
-            <div class="quiz-step" data-step="2" data-bg="./assets/images/booking/cuisine.jpg">
-              <h3 class="quiz-step__title">Select Cuisine</h3>
-              <div class="quiz-step__options">
-                <label class="quiz-option">
-                  <input type="radio" name="cuisine" value="italy" class="quiz-option__input">
-                  <span class="quiz-option__card">
-                    <span class="quiz-option__flag">🇮🇹</span>
-                    <span class="quiz-option__name">Italy</span>
-                  </span>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="cuisine" value="india" class="quiz-option__input">
-                  <span class="quiz-option__card">
-                    <span class="quiz-option__flag">🇮🇳</span>
-                    <span class="quiz-option__name">India</span>
-                  </span>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="cuisine" value="thailand" class="quiz-option__input">
-                  <span class="quiz-option__card">
-                    <span class="quiz-option__flag">🇹🇭</span>
-                    <span class="quiz-option__name">Thailand</span>
-                  </span>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="cuisine" value="georgia" class="quiz-option__input">
-                  <span class="quiz-option__card">
-                    <span class="quiz-option__flag">🇬🇪</span>
-                    <span class="quiz-option__name">Georgia</span>
-                  </span>
-                </label>
+            <!-- Step 1: Date and Cuisine -->
+            <div class="quiz-step quiz-step--active" data-step="1" data-bg="./assets/images/booking/step1-bg.jpg">
+              <h3 class="quiz-step__title">Step 1: Choose Your Dinner</h3>
+              <div class="form__group">
+                <label for="quiz-date" class="form__label">Select date *</label>
+                <input type="date" class="form__input" id="quiz-date" name="date" required>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Select cuisine *</label>
+                <div class="quiz-step__options">
+                  <label class="quiz-option">
+                    <input type="radio" name="cuisine" value="italy" class="quiz-option__input" required>
+                    <span class="quiz-option__card">
+                      <span class="quiz-option__flag">🇮🇹</span>
+                      <span class="quiz-option__name">Italy</span>
+                    </span>
+                  </label>
+                  <label class="quiz-option">
+                    <input type="radio" name="cuisine" value="india" class="quiz-option__input" required>
+                    <span class="quiz-option__card">
+                      <span class="quiz-option__flag">🇮🇳</span>
+                      <span class="quiz-option__name">India</span>
+                    </span>
+                  </label>
+                  <label class="quiz-option">
+                    <input type="radio" name="cuisine" value="thailand" class="quiz-option__input" required>
+                    <span class="quiz-option__card">
+                      <span class="quiz-option__flag">🇹🇭</span>
+                      <span class="quiz-option__name">Thailand</span>
+                    </span>
+                  </label>
+                  <label class="quiz-option">
+                    <input type="radio" name="cuisine" value="georgia" class="quiz-option__input" required>
+                    <span class="quiz-option__card">
+                      <span class="quiz-option__flag">🇬🇪</span>
+                      <span class="quiz-option__name">Georgia</span>
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
 
-            <!-- Question 3: Contact Info -->
-            <div class="quiz-step" data-step="3" data-bg="./assets/images/booking/contact.jpg">
-              <h3 class="quiz-step__title">Your Contact Details</h3>
+            <!-- Step 2: Contact Info -->
+            <div class="quiz-step" data-step="2" data-bg="./assets/images/booking/step2-bg.jpg">
+              <h3 class="quiz-step__title">Step 2: Your Contact Info</h3>
               <div class="form__group">
-                <label for="quiz-name" class="form__label">Name</label>
-                <input type="text" class="form__input" id="quiz-name" name="name" required>
+                <label for="quiz-name" class="form__label">Full name *</label>
+                <input type="text" class="form__input" id="quiz-name" name="name" required pattern="[A-Za-zА-Яа-я\s\-]+" title="Only letters, spaces, and hyphens">
               </div>
               <div class="form__group">
-                <label for="quiz-phone" class="form__label">Phone</label>
-                <input type="tel" class="form__input" id="quiz-phone" name="phone" required>
+                <label for="quiz-phone" class="form__label">Phone (WhatsApp/Telegram) *</label>
+                <input type="tel" class="form__input" id="quiz-phone" name="phone" required pattern="^[\+\d\s\-\(\)]{8,20}$" title="Enter a valid phone number">
+              </div>
+              <div class="form__group">
+                <label for="quiz-email" class="form__label">Email (optional)</label>
+                <input type="email" class="form__input" id="quiz-email" name="email">
+              </div>
+            </div>
+
+            <!-- Step 3: Allergies and About -->
+            <div class="quiz-step" data-step="3" data-bg="./assets/images/booking/step3-bg.jpg">
+              <h3 class="quiz-step__title">Step 3: Additional Info (optional)</h3>
+              <div class="form__group">
+                <label class="form__label">Do you have any allergies or dietary restrictions?</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="allergies" value="yes" id="allergies-yes"> Yes
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="allergies" value="no" id="allergies-no" checked> No
+                  </label>
+                </div>
+              </div>
+              <div class="form__group" id="allergy-details-group" style="display: none;">
+                <label for="allergy-details" class="form__label">Please specify:</label>
+                <textarea id="allergy-details" name="allergy_details" class="form__textarea" rows="2" maxlength="200"></textarea>
+              </div>
+              <div class="form__group">
+                <label for="quiz-about" class="form__label">Tell us a bit about yourself (optional)</label>
+                <textarea id="quiz-about" name="about" class="form__textarea" rows="3" placeholder="Where are you from? What brings you to Phuket?"></textarea>
+              </div>
+            </div>
+
+            <!-- Step 4: Confirmation -->
+            <div class="quiz-step" data-step="4" data-bg="./assets/images/booking/step4-bg.jpg">
+              <h3 class="quiz-step__title">Step 4: Almost Done!</h3>
+              <p class="quiz-step__info">Please check your information and confirm.</p>
+              <div class="form__group">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="consent" required>
+                  <span>I agree to the processing of personal data and confirm that the information provided is correct</span>
+                </label>
               </div>
             </div>
 
