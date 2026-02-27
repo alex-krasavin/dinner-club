@@ -21,7 +21,30 @@ document.addEventListener('DOMContentLoaded', () => {
   initDinnerTabs();
   initGallery();
   initCurrentYear();
+  initDatePicker();
 });
+
+// ===== Date Picker (Flatpickr) =====
+function initDatePicker() {
+  const dateInput = document.getElementById('quiz-date');
+  if (!dateInput || !window.flatpickr) return;
+
+  flatpickr(dateInput, {
+    locale: 'en',
+    minDate: 'today',
+    dateFormat: 'Y-m-d',
+    disable: [
+      function(date) {
+        // Disable weekdays (allow only Saturday=6 and Sunday=0)
+        return date.getDay() !== 0 && date.getDay() !== 6;
+      }
+    ],
+    onChange: function(selectedDates, dateStr, instance) {
+      // Trigger change event for handleDateChange
+      dateInput.dispatchEvent(new Event('change'));
+    }
+  });
+}
 
 // ===== Load Hero Slides from API =====
 async function loadHeroSlides() {
@@ -390,7 +413,7 @@ function initBookingQuiz() {
     });
   }
 
-  // Handle date change
+  // Handle date change (Flatpickr triggers change event)
   if (quizDateInput) {
     quizDateInput.addEventListener('change', handleDateChange);
   }
@@ -481,7 +504,7 @@ function initDinnerTabs() {
     const tabBtn = document.createElement('button');
     tabBtn.className = `menu__tab ${index === 0 ? 'menu__tab--active' : ''}`;
     tabBtn.dataset.country = dinner.country;
-    tabBtn.innerHTML = `<span class="menu__tab-flag">${dinner.flag}</span><span class="menu__tab-name">${dinner.name}</span>`;
+    tabBtn.innerHTML = `<span class="menu__tab-name">${dinner.name}</span>`;
     tabBtn.addEventListener('click', () => switchDinnerTab(dinner, tabBtn));
     tabsContainer.appendChild(tabBtn);
   });

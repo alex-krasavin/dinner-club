@@ -704,7 +704,11 @@ ul, ol {
    ======================== */
 .gallery {
   padding: var(--spacing-3xl) 0;
-  background-color: var(--color-bg-light);
+  background-color: var(--color-secondary);
+}
+
+.gallery .section__title {
+  color: #fff;
 }
 
 .gallery-slider {
@@ -712,19 +716,40 @@ ul, ol {
 }
 
 .gallery-swiper {
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 }
 
 .gallery-swiper .swiper-slide {
   width: 400px;
   height: 300px;
+  background-color: var(--color-bg-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
 }
 
 .gallery-swiper .swiper-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--border-radius-lg);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.gallery-swiper .swiper-slide:hover img {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Gallery Pagination - White/Gold on dark background */
+.gallery-swiper .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.5;
+  transition: all var(--transition-base);
+}
+
+.gallery-swiper .swiper-pagination-bullet-active {
+  background: var(--color-accent);
+  opacity: 1;
+  transform: scale(1.3);
 }
 
 /* ========================
@@ -733,43 +758,37 @@ ul, ol {
 .booking-quiz {
   position: relative;
   min-height: 600px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--color-bg-white);
 }
 
 .booking-quiz__background {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url('./assets/images/booking/date.jpg');
-  transition: background-image var(--transition-base);
-  min-height: 600px;
+  display: none;
 }
 
 .booking-quiz .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: var(--spacing-3xl) var(--spacing-2xl);
+  display: block;
+  padding: 0 var(--container-padding);
 }
 
 .booking-quiz__card {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
+  margin: 0 auto;
   padding: var(--spacing-2xl);
-  background-color: var(--color-bg-white);
+  background-color: var(--color-bg-light);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-accent);
 }
 
 .booking-quiz__title {
   font-size: var(--font-size-3xl);
   margin-bottom: var(--spacing-2xl);
   color: var(--color-secondary);
+  text-align: center;
 }
 
 .quiz-step {
@@ -792,6 +811,50 @@ ul, ol {
   font-size: var(--font-size-sm);
   color: var(--color-text-light);
   margin-top: var(--spacing-sm);
+}
+
+/* ===== Flatpickr Custom Styles ===== */
+.flatpickr-calendar {
+  border: 1px solid var(--color-accent);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--border-radius-md);
+}
+
+.flatpickr-day.selected {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.flatpickr-day.today {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.flatpickr-day:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.flatpickr-day.flatpickr-disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.flatpickr-weekdays {
+  color: var(--color-secondary);
+}
+
+.flatpickr-months .flatpickr-month {
+  background: var(--color-bg-light);
+  color: var(--color-text);
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+  color: var(--color-text);
+}
+
+.flatpickr-current-month input.cur-year {
+  color: var(--color-text);
 }
 
 /* ===== Dinner Info ===== */
@@ -1006,19 +1069,6 @@ ul, ol {
    Responsive Design
    ======================== */
 @media (max-width: 1024px) {
-  .booking-quiz {
-    grid-template-columns: 1fr;
-  }
-
-  .booking-quiz__background {
-    display: none;
-  }
-
-  .booking-quiz .container {
-    justify-content: center;
-    padding: var(--spacing-2xl) var(--container-padding);
-  }
-
   .booking-quiz__card {
     max-width: 100%;
   }

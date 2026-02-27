@@ -237,7 +237,7 @@
               <h3 class="quiz-step__title">Step 1: Choose Your Dinner</h3>
               <div class="form__group">
                 <label for="quiz-date" class="form__label">Select date *</label>
-                <input type="date" class="form__input" id="quiz-date" name="date" required>
+                <input type="text" class="form__input" id="quiz-date" name="date" required placeholder="Select a date (Sat/Sun only)">
                 <p class="form__hint">Available dates: Saturdays and Sundays only</p>
               </div>
               
@@ -408,6 +408,10 @@
 
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Flatpickr (Custom Date Picker) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   <!-- Main Script -->
   <script type="module" src="./js/main.js"></script>
