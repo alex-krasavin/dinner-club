@@ -228,10 +228,10 @@
     <section class="booking-quiz" id="booking-quiz">
       <div class="booking-quiz__background" id="booking-bg"></div>
       <div class="container">
-        <div class="booking-quiz__card">
-          <h2 class="booking-quiz__title">Book a Table</h2>
-
-          <form class="booking-quiz__form" id="booking-quiz-form" novalidate>
+        <h2 class="section__title">Book a Table</h2>
+        <div class="booking-quiz__content">
+          <div class="booking-quiz__card">
+            <form class="booking-quiz__form" id="booking-quiz-form" novalidate>
             <!-- Step 1: Date and Dinner Info -->
             <div class="quiz-step quiz-step--active" data-step="1" data-bg="./assets/images/booking/step1-bg.jpg">
               <h3 class="quiz-step__title">Step 1: Choose Your Dinner</h3>
@@ -244,7 +244,6 @@
               <!-- Dinner info (loaded after date selection) -->
               <div class="dinner-info hidden" id="dinner-info">
                 <div class="dinner-info__header">
-                  <span class="dinner-info__flag" id="dinner-flag">🇮🇹</span>
                   <div class="dinner-info__text">
                     <h4 class="dinner-info__title" id="dinner-title">Italian Night</h4>
                     <p class="dinner-info__date" id="dinner-date-display"></p>
@@ -329,6 +328,14 @@
               <p>Thank you! Your booking request has been received. We'll contact you soon.</p>
             </div>
           </form>
+          </div>
+
+          <!-- Dinner Preview (right side - desktop only) -->
+          <div class="booking-quiz__preview" id="booking-preview">
+            <div class="dinner-preview__menu" id="dinner-preview-menu">
+              <!-- Preview items loaded dynamically -->
+            </div>
+          </div>
         </div>
       </div>
     </section>

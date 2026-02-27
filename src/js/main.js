@@ -179,7 +179,6 @@ function initBookingQuiz() {
   const allergyDetailsGroup = document.getElementById('allergy-details-group');
   const quizDateInput = document.getElementById('quiz-date');
   const dinnerInfo = document.getElementById('dinner-info');
-  const dinnerFlag = document.getElementById('dinner-flag');
   const dinnerTitle = document.getElementById('dinner-title');
   const dinnerDateDisplay = document.getElementById('dinner-date-display');
   const dinnerMenuList = document.getElementById('dinner-menu-list');
@@ -256,16 +255,45 @@ function initBookingQuiz() {
   // Render dinner info
   function renderDinnerInfo(dinner) {
     if (!dinner || !quizDateInput.value) return;
-    
-    dinnerFlag.textContent = dinner.flag;
+
     dinnerTitle.textContent = dinner.title;
     dinnerDateDisplay.textContent = formatDate(quizDateInput.value);
     dinnerMenuList.innerHTML = dinner.menu
       .map(item => `<li>${item}</li>`)
       .join('');
     dinnerIdInput.value = dinner.id;
-    
+
     dinnerInfo.classList.remove('hidden');
+
+    // Update preview panel
+    updateDinnerPreview(dinner);
+  }
+
+  // Update dinner preview panel
+  function updateDinnerPreview(dinner) {
+    const previewPanel = document.getElementById('booking-preview');
+    const previewMenu = document.getElementById('dinner-preview-menu');
+    if (!previewPanel || !previewMenu) return;
+
+    previewPanel.classList.add('active');
+
+    const menuItems = [
+      { name: dinner.menu[0], type: 'Starter', image: `./assets/images/dishes/${dinner.country}-1.jpg` },
+      { name: dinner.menu[1], type: 'Main Course', image: `./assets/images/dishes/${dinner.country}-2.jpg` },
+      { name: dinner.menu[2], type: 'Dessert', image: `./assets/images/dishes/${dinner.country}-3.jpg` }
+    ];
+
+    previewMenu.innerHTML = menuItems.map(item => `
+      <div class="dinner-preview__item">
+        <div class="dinner-preview__item-image">
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='./assets/images/dishes/placeholder.jpg'">
+        </div>
+        <div class="dinner-preview__item-info">
+          <h4>${item.name}</h4>
+          <p>${item.type}</p>
+        </div>
+      </div>
+    `).join('');
   }
 
   // Date input change handler
