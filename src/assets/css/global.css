@@ -791,15 +791,11 @@ ul, ol {
   border: 1px solid var(--color-accent);
 }
 
-/* Dinner Preview (right side) */
+/* Dinner Preview (right side - desktop only) */
 .booking-quiz__preview {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-}
-
-.booking-quiz__preview.active {
-  display: flex;
 }
 
 /* Preview Placeholder */
