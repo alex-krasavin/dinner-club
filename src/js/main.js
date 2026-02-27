@@ -273,9 +273,14 @@ function initBookingQuiz() {
   function updateDinnerPreview(dinner) {
     const previewPanel = document.getElementById('booking-preview');
     const previewMenu = document.getElementById('dinner-preview-menu');
+    const placeholder = document.getElementById('booking-placeholder');
     if (!previewPanel || !previewMenu) return;
 
+    // Show preview panel and hide placeholder
     previewPanel.classList.add('active');
+    if (placeholder) {
+      placeholder.style.display = 'none';
+    }
 
     const menuItems = [
       { name: dinner.menu[0], type: 'Starter', image: `./assets/images/dishes/${dinner.country}-1.jpg` },
@@ -303,6 +308,7 @@ function initBookingQuiz() {
     if (!dateValue) {
       dinnerInfo.classList.add('hidden');
       selectedDinner = null;
+      resetDinnerPreview();
       return;
     }
 
@@ -310,6 +316,7 @@ function initBookingQuiz() {
     if (!isWeekend(dateValue)) {
       dinnerInfo.classList.add('hidden');
       selectedDinner = null;
+      resetDinnerPreview();
       // Show error animation on input
       quizDateInput.style.animation = 'shake 0.4s ease';
       setTimeout(() => {
@@ -322,6 +329,23 @@ function initBookingQuiz() {
     selectedDinner = await fetchDinnerByDate(dateValue);
     if (selectedDinner) {
       renderDinnerInfo(selectedDinner);
+    }
+  }
+
+  // Reset dinner preview to placeholder
+  function resetDinnerPreview() {
+    const previewPanel = document.getElementById('booking-preview');
+    const placeholder = document.getElementById('booking-placeholder');
+    const previewMenu = document.getElementById('dinner-preview-menu');
+    
+    if (previewPanel) {
+      previewPanel.classList.remove('active');
+    }
+    if (placeholder) {
+      placeholder.style.display = 'flex';
+    }
+    if (previewMenu) {
+      previewMenu.innerHTML = '';
     }
   }
 

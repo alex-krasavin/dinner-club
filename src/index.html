@@ -332,6 +332,31 @@
 
           <!-- Dinner Preview (right side - desktop only) -->
           <div class="booking-quiz__preview" id="booking-preview">
+            <!-- Placeholder when no dinner selected -->
+            <div class="booking-preview__placeholder" id="booking-placeholder">
+              <div class="booking-preview__icon">🍽️</div>
+              <h3 class="booking-preview__title">Select a Date to See the Menu</h3>
+              <p class="booking-preview__text">Choose a weekend date to discover our curated dining experience</p>
+              <ul class="booking-preview__features">
+                <li class="booking-preview__feature">
+                  <span class="booking-preview__feature-icon">✨</span>
+                  <span>3-course homemade menu</span>
+                </li>
+                <li class="booking-preview__feature">
+                  <span class="booking-preview__feature-icon">👥</span>
+                  <span>Up to 15 guests</span>
+                </li>
+                <li class="booking-preview__feature">
+                  <span class="booking-preview__feature-icon">🍷</span>
+                  <span>Wine pairing available</span>
+                </li>
+                <li class="booking-preview__feature">
+                  <span class="booking-preview__feature-icon">🌍</span>
+                  <span>New cuisine every week</span>
+                </li>
+              </ul>
+            </div>
+            <!-- Dinner menu (shown when date selected) -->
             <div class="dinner-preview__menu" id="dinner-preview-menu">
               <!-- Preview items loaded dynamically -->
             </div>
