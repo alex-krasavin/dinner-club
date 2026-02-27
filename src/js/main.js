@@ -374,20 +374,27 @@ function initBookingQuiz() {
       return validateContactFields();
     }
 
-    // Step 3 & 4: Validate required fields
-    const inputs = currentStepEl.querySelectorAll('input[required], textarea[required], select[required]');
-    for (let input of inputs) {
-      if (input.type === 'radio') {
-        const radioGroup = currentStepEl.querySelectorAll(`input[name="${input.name}"]`);
-        const isChecked = Array.from(radioGroup).some(r => r.checked);
-        if (!isChecked) {
+    // Step 3: Validate allergies details if yes is selected
+    if (currentStep === 2) {
+      const allergiesYes = document.getElementById('allergies-yes');
+      const allergyDetails = document.getElementById('allergy-details');
+      
+      if (allergiesYes && allergiesYes.checked) {
+        if (!allergyDetails || !allergyDetails.value.trim()) {
+          // Show error
+          if (allergyDetails) {
+            allergyDetails.classList.add('form__input--error');
+          }
           return false;
         }
-      } else if (input.type === 'checkbox') {
-        if (!input.checked) {
-          return false;
-        }
-      } else if (!input.value.trim()) {
+        allergyDetails.classList.remove('form__input--error');
+      }
+    }
+
+    // Step 4: Validate consent checkbox
+    if (currentStep === 3) {
+      const consentCheckbox = quizForm.querySelector('input[name="consent"]');
+      if (consentCheckbox && !consentCheckbox.checked) {
         return false;
       }
     }
@@ -424,21 +431,36 @@ function initBookingQuiz() {
 
   // Handle allergies toggle
   if (allergiesYes && allergiesNo && allergyDetailsGroup) {
+    const allergyDetails = document.getElementById('allergy-details');
+    
     allergiesYes.addEventListener('change', () => {
       if (allergiesYes.checked) {
         allergyDetailsGroup.style.display = 'block';
+        if (allergyDetails) {
+          allergyDetails.setAttribute('required', 'required');
+        }
       }
     });
 
     allergiesNo.addEventListener('change', () => {
       if (allergiesNo.checked) {
         allergyDetailsGroup.style.display = 'none';
-        const allergyDetails = document.getElementById('allergy-details');
         if (allergyDetails) {
           allergyDetails.value = '';
+          allergyDetails.removeAttribute('required');
+          allergyDetails.classList.remove('form__input--error');
         }
       }
     });
+
+    // Clear error on input
+    if (allergyDetails) {
+      allergyDetails.addEventListener('input', () => {
+        if (allergyDetails.value.trim()) {
+          allergyDetails.classList.remove('form__input--error');
+        }
+      });
+    }
   }
 
   // Handle date change (Flatpickr triggers change event)
