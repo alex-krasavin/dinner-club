@@ -388,12 +388,6 @@ ul, ol {
   height: 100%;
 }
 
-.hero__slide {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 /* Background images are set dynamically via JavaScript from API data */
 .hero__slide {
@@ -408,7 +402,7 @@ ul, ol {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(46, 92, 76, 0.7) 0%, rgba(193, 124, 94, 0.5) 100%);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .hero__content {
@@ -571,6 +565,14 @@ ul, ol {
 .step__description {
   color: var(--color-text-light);
   line-height: 1.7;
+}
+
+.step__benefit {
+  display: block;
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-primary);
 }
 
 /* ========================
@@ -905,6 +907,47 @@ ul, ol {
   color: var(--color-text-light);
   margin-bottom: var(--spacing-lg);
   line-height: 1.6;
+}
+
+/* ========================
+   FAQ Section
+   ======================== */
+.faq {
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--color-bg-light);
+}
+
+.faq__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+.faq__item {
+  background-color: var(--color-bg-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.faq__item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.faq__question {
+  font-size: var(--font-size-lg);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.faq__answer {
+  color: var(--color-text-light);
+  line-height: 1.6;
+  font-size: var(--font-size-base);
 }
 
 /* ========================

@@ -99,7 +99,7 @@
           <div class="swiper-slide hero__slide" data-image="./assets/images/hero/hero-1.jpg">
             <div class="hero__overlay"></div>
             <div class="hero__content container">
-              <h1 class="hero__title">A Journey of Flavors</h1>
+              <h1 class="hero__title">The Global Table: Gastronomic Dinners & Community in Phuket</h1>
               <p class="hero__subtitle">International dinners in one place</p>
               <a href="#booking-quiz" class="btn btn--primary btn--large">Book a Table</a>
             </div>
@@ -108,7 +108,7 @@
           <div class="swiper-slide hero__slide" data-image="./assets/images/hero/hero-2.jpg">
             <div class="hero__overlay"></div>
             <div class="hero__content container">
-              <h1 class="hero__title">New Cuisine Every Week</h1>
+              <h2 class="hero__title">Taste the World Without Leaving Phuket</h2>
               <p class="hero__subtitle">From South Africa to India</p>
               <a href="#booking-quiz" class="btn btn--primary btn--large">Book a Table</a>
             </div>
@@ -117,7 +117,7 @@
           <div class="swiper-slide hero__slide" data-image="./assets/images/hero/hero-3.jpg">
             <div class="hero__overlay"></div>
             <div class="hero__content container">
-              <h1 class="hero__title">Up to 15 Guests</h1>
+              <h2 class="hero__title">Exclusive 15-Seat Dinners: Book Yours Now</h2>
               <p class="hero__subtitle">Intimate atmosphere and new connections</p>
               <a href="#booking-quiz" class="btn btn--primary btn--large">Book a Table</a>
             </div>
@@ -148,7 +148,8 @@
           <p class="about__text">
             Every weekend, we transform our space into a culinary journey to a different
             country. Experience the warmth of home cooking and the joy of meaningful
-            connections.
+            connections. Forget lonely dinners at restaurants. Here, you'll leave with
+            new friends and unforgettable memories.
           </p>
         </div>
       </div>
@@ -167,6 +168,7 @@
             <p class="step__description">
               Our chef selects a new cuisine each week. Check our schedule to see what's coming up.
             </p>
+            <span class="step__benefit">New cuisine every weekend, never boring</span>
           </div>
           <div class="step">
             <div class="step__number">2</div>
@@ -174,6 +176,7 @@
             <p class="step__description">
               Reserve your seat at our communal table (up to 15 guests for an intimate experience).
             </p>
+            <span class="step__benefit">Free cancellation up to 48h before</span>
           </div>
           <div class="step">
             <div class="step__number">3</div>
@@ -181,6 +184,7 @@
             <p class="step__description">
               Meet new friends, share stories, and savor authentic homemade dishes.
             </p>
+            <span class="step__benefit">Meet like-minded foodies</span>
           </div>
         </div>
       </div>
@@ -193,38 +197,11 @@
       <div class="container">
         <h2 class="section__title">Upcoming Dinners</h2>
 
-        <!-- Menu Content - Single panel (admin selects cuisine) -->
-        <div class="menu__content" id="menu-content">
-          <div class="menu__panel menu__panel--active" style="display: grid;">
-            <div class="dish-card">
-              <div class="dish-card__image">
-                <img src="./assets/images/dishes/bruschetta.jpg" alt="Bruschetta" loading="lazy">
-              </div>
-              <div class="dish-card__content">
-                <h3 class="dish-card__title">Bruschetta</h3>
-                <p class="dish-card__description">Tomatoes, basil, olive oil</p>
-              </div>
-            </div>
-            <div class="dish-card">
-              <div class="dish-card__image">
-                <img src="./assets/images/dishes/pasta.jpg" alt="Pasta Carbonara" loading="lazy">
-              </div>
-              <div class="dish-card__content">
-                <h3 class="dish-card__title">Pasta Carbonara</h3>
-                <p class="dish-card__description">Guanciale, pecorino, egg yolk</p>
-              </div>
-            </div>
-            <div class="dish-card">
-              <div class="dish-card__image">
-                <img src="./assets/images/dishes/tiramisu.jpg" alt="Tiramisu" loading="lazy">
-              </div>
-              <div class="dish-card__content">
-                <h3 class="dish-card__title">Tiramisu</h3>
-                <p class="dish-card__description">Mascarpone, savoiardi, espresso</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Dinner Tabs (generated dynamically) -->
+        <div class="menu__tabs" id="menu-tabs"></div>
+
+        <!-- Menu Content (generated dynamically) -->
+        <div class="menu__content" id="menu-content"></div>
       </div>
     </section>
 
@@ -330,7 +307,7 @@
 
             <!-- Step 4: Confirmation -->
             <div class="quiz-step" data-step="4" data-bg="./assets/images/booking/step4-bg.jpg">
-              <h3 class="quiz-step__title">Step 4: Almost Done!</h3>
+              <h3 class="quiz-step__title">One Last Step to Your Culinary Adventure!</h3>
               <p class="quiz-step__info">Please check your information and confirm.</p>
               <div class="form__group">
                 <label class="checkbox-label">
@@ -344,7 +321,7 @@
             <div class="quiz-step__nav">
               <button type="button" class="btn btn--secondary quiz-prev-btn" id="quiz-prev" disabled>Back</button>
               <button type="button" class="btn btn--primary quiz-next-btn" id="quiz-next">Next</button>
-              <button type="submit" class="btn btn--primary quiz-submit-btn hidden" id="quiz-submit">Submit Request</button>
+              <button type="submit" class="btn btn--primary quiz-submit-btn hidden" id="quiz-submit">Yes, I Want to Book!</button>
             </div>
 
             <!-- Success Message -->
@@ -352,6 +329,47 @@
               <p>Thank you! Your booking request has been received. We'll contact you soon.</p>
             </div>
           </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         FAQ Section
+    ======================== -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <h2 class="section__title">Frequently Asked Questions</h2>
+        <div class="faq__grid">
+          <!-- Question 1 -->
+          <div class="faq__item">
+            <h3 class="faq__question">How much does a dinner cost?</h3>
+            <p class="faq__answer">Price varies depending on the cuisine and menu, typically ranging from 1,200 to 1,800 THB per person. Drinks are not included but can be purchased separately.</p>
+          </div>
+          <!-- Question 2 -->
+          <div class="faq__item">
+            <h3 class="faq__question">Do you accommodate dietary restrictions?</h3>
+            <p class="faq__answer">Yes! We have a special field in the booking form where you can specify any allergies or dietary preferences. We'll do our best to adapt the menu for you.</p>
+          </div>
+          <!-- Question 3 -->
+          <div class="faq__item">
+            <h3 class="faq__question">What if I need to cancel?</h3>
+            <p class="faq__answer">You can cancel up to 48 hours before the event for a full refund. Later cancellations are non-refundable, but you can transfer your spot to a friend.</p>
+          </div>
+          <!-- Question 4 -->
+          <div class="faq__item">
+            <h3 class="faq__question">Can I come alone?</h3>
+            <p class="faq__answer">Absolutely! Our dinners are designed for solo guests to meet new people. Most of our attendees come alone and leave with new friends.</p>
+          </div>
+          <!-- Question 5 -->
+          <div class="faq__item">
+            <h3 class="faq__question">Is alcohol included?</h3>
+            <p class="faq__answer">Alcohol is not included in the price, but we offer a selection of wines and beers available for purchase at the event.</p>
+          </div>
+          <!-- Question 6 -->
+          <div class="faq__item">
+            <h3 class="faq__question">Where exactly in Phuket do you host the dinners?</h3>
+            <p class="faq__answer">We host dinners in private venues near Kata Beach. The exact address is provided after booking confirmation for privacy and security.</p>
+          </div>
         </div>
       </div>
     </section>

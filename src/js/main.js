@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadHeroSlides();
   initFormValidation();
   initBookingQuiz();
+  initDinnerTabs();
   initGallery();
   initCurrentYear();
 });
@@ -443,6 +444,83 @@ function initBookingQuiz() {
 
   // Initialize
   updateStep();
+}
+
+// ===== Dinner Tabs =====
+function initDinnerTabs() {
+  const tabsContainer = document.getElementById('menu-tabs');
+  const menuContent = document.getElementById('menu-content');
+  if (!tabsContainer || !menuContent) return;
+
+  // Dinner data
+  const dinners = [
+    { id: 1, country: 'italy', flag: '🇮🇹', name: 'Italy', menu: [
+      { name: 'Bruschetta', desc: 'Tomatoes, basil, olive oil', image: 'bruschetta.jpg' },
+      { name: 'Pasta Carbonara', desc: 'Guanciale, pecorino, egg yolk', image: 'pasta.jpg' },
+      { name: 'Tiramisu', desc: 'Mascarpone, savoiardi, espresso', image: 'tiramisu.jpg' }
+    ]},
+    { id: 2, country: 'india', flag: '🇮🇳', name: 'India', menu: [
+      { name: 'Samosa', desc: 'Potato filling with spices', image: 'samosa.jpg' },
+      { name: 'Butter Chicken', desc: 'Creamy tomato curry', image: 'butter-chicken.jpg' },
+      { name: 'Gulab Jamun', desc: 'Sweet milk dumplings', image: 'gulab-jamun.jpg' }
+    ]},
+    { id: 3, country: 'thailand', flag: '🇹🇭', name: 'Thailand', menu: [
+      { name: 'Tom Yum', desc: 'Spicy shrimp soup', image: 'tom-yum.jpg' },
+      { name: 'Pad Thai', desc: 'Stir-fried rice noodles', image: 'pad-thai.jpg' },
+      { name: 'Mango Sticky Rice', desc: 'Sweet coconut rice', image: 'mango-sticky-rice.jpg' }
+    ]},
+    { id: 4, country: 'georgia', flag: '🇬🇪', name: 'Georgia', menu: [
+      { name: 'Khachapuri', desc: 'Cheese-filled bread', image: 'khachapuri.jpg' },
+      { name: 'Khinkali', desc: 'Meat dumplings', image: 'khinkali.jpg' },
+      { name: 'Badrijani', desc: 'Eggplant with walnut paste', image: 'badrijani.jpg' }
+    ]}
+  ];
+
+  // Create tabs
+  dinners.forEach((dinner, index) => {
+    const tabBtn = document.createElement('button');
+    tabBtn.className = `menu__tab ${index === 0 ? 'menu__tab--active' : ''}`;
+    tabBtn.dataset.country = dinner.country;
+    tabBtn.innerHTML = `<span class="menu__tab-flag">${dinner.flag}</span><span class="menu__tab-name">${dinner.name}</span>`;
+    tabBtn.addEventListener('click', () => switchDinnerTab(dinner, tabBtn));
+    tabsContainer.appendChild(tabBtn);
+  });
+
+  // Switch dinner tab function
+  function switchDinnerTab(dinner, activeTab) {
+    // Update tab classes
+    document.querySelectorAll('.menu__tab').forEach(tab => tab.classList.remove('menu__tab--active'));
+    activeTab.classList.add('menu__tab--active');
+
+    // Create menu panel
+    menuContent.innerHTML = '';
+    const panel = document.createElement('div');
+    panel.className = 'menu__panel menu__panel--active';
+    panel.style.display = 'grid';
+
+    dinner.menu.forEach((dish) => {
+      const card = document.createElement('div');
+      card.className = 'dish-card';
+      card.innerHTML = `
+        <div class="dish-card__image">
+          <img src="./assets/images/dishes/${dish.image}" alt="${dish.name}" loading="lazy" onerror="this.src='./assets/images/dishes/placeholder.jpg'">
+        </div>
+        <div class="dish-card__content">
+          <h3 class="dish-card__title">${dish.name}</h3>
+          <p class="dish-card__description">${dish.desc}</p>
+        </div>
+      `;
+      panel.appendChild(card);
+    });
+
+    menuContent.appendChild(panel);
+  }
+
+  // Initialize first tab (Italy)
+  const firstTab = tabsContainer.querySelector('.menu__tab');
+  if (firstTab) {
+    switchDinnerTab(dinners[0], firstTab);
+  }
 }
 
 // ===== Gallery Slider =====

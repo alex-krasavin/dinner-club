@@ -11,21 +11,21 @@ const HERO_SLIDES_MOCK = [
   {
     id: 1,
     image: './assets/images/hero/hero-1.jpg',
-    title: 'A Journey of Flavors',
+    title: 'The Global Table: Gastronomic Dinners & Community in Phuket',
     subtitle: 'International dinners in one place',
     active: true
   },
   {
     id: 2,
     image: './assets/images/hero/hero-2.jpg',
-    title: 'New Cuisine Every Week',
+    title: 'Taste the World Without Leaving Phuket',
     subtitle: 'From South Africa to India',
     active: true
   },
   {
     id: 3,
     image: './assets/images/hero/hero-3.jpg',
-    title: 'Up to 15 Guests',
+    title: 'Exclusive 15-Seat Dinners: Book Yours Now',
     subtitle: 'Intimate atmosphere and new connections',
     active: true
   }
