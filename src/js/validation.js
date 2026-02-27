@@ -72,6 +72,88 @@ export function sanitizeName(value) {
 }
 
 /**
+ * Санитизация textarea полей (защита от XSS и инъекций)
+ * Удаляет все потенциально опасные символы и HTML теги
+ * @param {string} value - значение поля
+ * @returns {string} - очищенное значение
+ */
+export function sanitizeTextarea(value) {
+  if (!value) return '';
+  
+  // Удаляем HTML теги
+  let sanitized = value.replace(/<[^>]*>/g, '');
+  
+  // Удаляем опасные символы и последовательности
+  sanitized = sanitized
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+\s*=/gi, '')
+    .replace(/<script[^>]*>.*?<\/script>/gi, '')
+    .replace(/<iframe[^>]*>.*?<\/iframe>/gi, '')
+    .replace(/<object[^>]*>.*?<\/object>/gi, '')
+    .replace(/<embed[^>]*>/gi, '')
+    .replace(/<link[^>]*>/gi, '')
+    .replace(/<style[^>]*>.*?<\/style>/gi, '')
+    .replace(/<form[^>]*>.*?<\/form>/gi, '')
+    .replace(/<input[^>]*>/gi, '')
+    .replace(/<button[^>]*>/gi, '')
+    .replace(/&#/g, '')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x2F;/g, '/')
+    .replace(/&#96;/g, '`')
+    .replace(/&#40;/g, '(')
+    .replace(/&#41;/g, ')')
+    .replace(/&#123;/g, '{')
+    .replace(/&#125;/g, '}')
+    .replace(/&#91;/g, '[')
+    .replace(/&#93;/g, ']')
+    .replace(/&#58;/g, ':')
+    .replace(/&#64;/g, '@');
+  
+  // Удаляем control characters (кроме \n, \r, \t)
+  sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+  
+  // Ограничиваем длину (максимум 500 символов для безопасности)
+  sanitized = sanitized.slice(0, 500);
+  
+  return sanitized.trim();
+}
+
+/**
+ * Валидация textarea (проверка на опасные символы)
+ * @param {string} value - значение поля
+ * @returns {boolean} - результат валидации
+ */
+export function validateTextarea(value) {
+  if (!value) return true; // Пустое поле валидно (если не required)
+  
+  // Проверяем на наличие опасных паттернов
+  const dangerousPatterns = [
+    /<script/i,
+    /javascript:/i,
+    /on\w+\s*=/i,
+    /<iframe/i,
+    /<object/i,
+    /<embed/i,
+    /eval\s*\(/i,
+    /alert\s*\(/i,
+    /document\./i,
+    /window\./i
+  ];
+  
+  for (let pattern of dangerousPatterns) {
+    if (pattern.test(value)) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+/**
  * Показать ошибку валидации
  * @param {HTMLElement} input - поле ввода
  * @param {HTMLElement} errorElement - элемент ошибки
@@ -153,6 +235,8 @@ export function initFormValidation() {
   const nameInput = document.getElementById('quiz-name');
   const phoneInput = document.getElementById('quiz-phone');
   const emailInput = document.getElementById('quiz-email');
+  const aboutInput = document.getElementById('quiz-about');
+  const allergyDetailsInput = document.getElementById('allergy-details');
 
   // Обработчик для имени - санитизация при вводе
   if (nameInput) {
@@ -183,7 +267,7 @@ export function initFormValidation() {
       const sanitized = sanitizePhone(e.target.value);
       // Добавляем пробелы для форматирования
       if (sanitized.length > 1) {
-        const formatted = sanitized.slice(0, 1) + ' ' + 
+        const formatted = sanitized.slice(0, 1) + ' ' +
           sanitized.slice(1, 4) + (sanitized.length > 4 ? ' ' : '') +
           sanitized.slice(4, 7) + (sanitized.length > 7 ? ' ' : '') +
           sanitized.slice(7, 11);
@@ -206,4 +290,25 @@ export function initFormValidation() {
       validateField(emailInput, emailError, validateEmail);
     });
   }
+
+  // Обработчики для textarea полей - санитизация при вводе
+  const textareaInputs = [aboutInput, allergyDetailsInput].filter(Boolean);
+  textareaInputs.forEach(input => {
+    if (input) {
+      input.addEventListener('input', (e) => {
+        const sanitized = sanitizeTextarea(e.target.value);
+        if (sanitized !== e.target.value) {
+          e.target.value = sanitized;
+        }
+      });
+
+      input.addEventListener('blur', () => {
+        if (!validateTextarea(input.value)) {
+          input.classList.add('form__input--error');
+        } else {
+          input.classList.remove('form__input--error');
+        }
+      });
+    }
+  });
 }

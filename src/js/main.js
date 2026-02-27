@@ -4,7 +4,7 @@
  */
 
 // ===== Import Modules =====
-import { initFormValidation, validateContactFields, validateName, validatePhone, validateEmail, sanitizePhone, sanitizeName } from './validation.js';
+import { initFormValidation, validateContactFields, validateName, validatePhone, validateEmail, sanitizePhone, sanitizeName, sanitizeTextarea, validateTextarea } from './validation.js';
 import { getHeroSlides, getDinnerByDate } from './api.js';
 
 // ===== DOM Ready =====
@@ -486,6 +486,13 @@ function initBookingQuiz() {
           data[key] = sanitizePhone(value);
         } else if (key === 'name') {
           data[key] = sanitizeName(value);
+        } else if (key === 'about' || key === 'allergy_details') {
+          // Sanitize textarea fields with extra security
+          if (!validateTextarea(value)) {
+            showErrorAnimation();
+            return;
+          }
+          data[key] = sanitizeTextarea(value);
         } else {
           data[key] = sanitizeInput(value);
         }
