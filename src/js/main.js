@@ -286,7 +286,7 @@ function initBookingQuiz() {
     previewMenu.innerHTML = menuItems.map(item => `
       <div class="dinner-preview__item">
         <div class="dinner-preview__item-image">
-          <img src="${item.image}" alt="${item.name}" onerror="this.src='./assets/images/dishes/placeholder.jpg'">
+          <img src="${item.image}" alt="${item.type}" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="dinner-preview__item-info">
           <h4>${item.name}</h4>

@@ -837,12 +837,26 @@ ul, ol {
   border-radius: var(--border-radius-md);
   overflow: hidden;
   flex-shrink: 0;
+  background-color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dinner-preview__item-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.dinner-preview__item-image img[style*="display: none"] {
+  display: none;
+}
+
+.dinner-preview__item-image::after {
+  content: '🍽️';
+  font-size: 2rem;
+  opacity: 0.5;
 }
 
 .dinner-preview__item-info h4 {
