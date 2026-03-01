@@ -241,16 +241,12 @@ ul, ol {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: transparent;
-  transition: background-color var(--transition-base), box-shadow var(--transition-base);
-}
-
-.header--scrolled {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur) var(--glass-saturate);
   -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
   box-shadow: var(--shadow-lg);
   border-bottom: var(--glass-border);
+  transition: all var(--transition-base);
 }
 
 .nav {

@@ -10,21 +10,21 @@ const API_BASE_URL = '/api'; // Заменить на реальный URL бэ�
 const HERO_SLIDES_MOCK = [
   {
     id: 1,
-    image: './assets/images/hero/hero-1.jpg',
+    image: './assets/images/hero/hero-1-1.jpg',
     title: 'The Global Table: Gastronomic Dinners & Community in Phuket',
     subtitle: 'International dinners in one place',
     active: true
   },
   {
     id: 2,
-    image: './assets/images/hero/hero-2.jpg',
+    image: './assets/images/hero/hero-2-1.jpg',
     title: 'Taste the World Without Leaving Phuket',
     subtitle: 'From South Africa to India',
     active: true
   },
   {
     id: 3,
-    image: './assets/images/hero/hero-3.jpg',
+    image: './assets/images/hero/hero-3-1.jpg',
     title: 'Exclusive 15-Seat Dinners: Book Yours Now',
     subtitle: 'Intimate atmosphere and new connections',
     active: true

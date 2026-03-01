@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('The Global Table by KG - Application initialized');
 
   // Initialize all modules
-  initHeaderScroll();
   initMobileMenu();
   initHeroSlider();
   loadHeroSlides();
@@ -83,24 +82,6 @@ async function loadHeroSlides() {
   } catch (error) {
     console.error('Failed to load hero slides:', error);
   }
-}
-
-// ===== Header Scroll Effect =====
-function initHeaderScroll() {
-  const header = document.getElementById('header');
-  
-  if (!header) return;
-  
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      header.classList.add('header--scrolled');
-    } else {
-      header.classList.remove('header--scrolled');
-    }
-  };
-  
-  window.addEventListener('scroll', handleScroll);
-  handleScroll(); // Check initial state
 }
 
 // ===== Mobile Menu Toggle =====
