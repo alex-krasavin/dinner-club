@@ -661,6 +661,7 @@ ul, ol {
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  position: relative;
 }
 
 .dish-card:hover {
@@ -673,6 +674,7 @@ ul, ol {
   height: 250px;
   overflow: hidden;
   background-color: var(--color-accent);
+  position: relative;
 }
 
 .dish-card__image img {
@@ -684,6 +686,25 @@ ul, ol {
 
 .dish-card:hover .dish-card__image img {
   transform: scale(1.1);
+}
+
+/* Dish Type Badge */
+.dish-card__badge {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
 }
 
 .dish-card__content {

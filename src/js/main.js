@@ -602,12 +602,17 @@ function initDinnerTabs() {
     panel.className = 'menu__panel menu__panel--active';
     panel.style.display = 'grid';
 
-    dinner.menu.forEach((dish) => {
+    dinner.menu.forEach((dish, index) => {
+      // Определяем тип блюда по индексу
+      const dishTypes = ['Appetizer', 'Main Course', 'Dessert'];
+      const dishType = dishTypes[index] || 'Dish';
+      
       const card = document.createElement('div');
       card.className = 'dish-card';
       card.innerHTML = `
         <div class="dish-card__image">
           <img src="./assets/images/dishes/${dish.image}" alt="${dish.name}" loading="lazy" onerror="this.src='./assets/images/dishes/placeholder.jpg'">
+          <span class="dish-card__badge">${dishType}</span>
         </div>
         <div class="dish-card__content">
           <h3 class="dish-card__title">${dish.name}</h3>
