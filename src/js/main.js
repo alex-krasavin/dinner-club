@@ -600,7 +600,6 @@ function initDinnerTabs() {
     menuContent.innerHTML = '';
     const panel = document.createElement('div');
     panel.className = 'menu__panel menu__panel--active';
-    panel.style.display = 'grid';
 
     dinner.menu.forEach((dish, index) => {
       // Определяем тип блюда по индексу

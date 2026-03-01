@@ -96,11 +96,24 @@ ul, ol {
   display: none !important;
 }
 
-/* ===== Section Title ===== */
-.section__title {
+/* ===== Section Header (wrapper for title + subtitle) ===== */
+.section__header {
   text-align: center;
   margin-bottom: var(--spacing-3xl);
+}
+
+.section__title {
   font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.section__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  font-weight: 300;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* ===== Buttons ===== */
