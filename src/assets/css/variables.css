@@ -50,6 +50,13 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 
+  /* ===== Эффект стекла ===== */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-dark: rgba(30, 40, 35, 0.8);
+  --glass-blur: blur(12px);
+  --glass-saturate: saturate(180%);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+
   /* ===== Переходы ===== */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;

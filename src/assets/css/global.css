@@ -235,8 +235,11 @@ ul, ol {
 }
 
 .header--scrolled {
-  background-color: var(--color-bg-white);
-  box-shadow: var(--shadow-md);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur) var(--glass-saturate);
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
+  box-shadow: var(--shadow-lg);
+  border-bottom: var(--glass-border);
 }
 
 .nav {
