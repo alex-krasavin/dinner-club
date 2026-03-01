@@ -148,8 +148,9 @@ ul, ol {
 }
 
 .btn--large {
-  padding: var(--spacing-lg) var(--spacing-2xl);
-  font-size: var(--font-size-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-base);
+  border-radius: var(--border-radius-full);
 }
 
 /* ===== Form Elements ===== */
@@ -443,6 +444,8 @@ ul, ol {
   opacity: 0.95;
 }
 
+/* Hero Pagination - Hidden */
+/*
 .hero__pagination {
   position: absolute;
   bottom: 40px;
@@ -463,6 +466,7 @@ ul, ol {
   background-color: var(--color-primary);
   transform: scale(1.2);
 }
+*/
 
 .hero__arrow {
   color: #fff;
