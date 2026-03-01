@@ -559,24 +559,24 @@ function initDinnerTabs() {
   // Dinner data
   const dinners = [
     { id: 1, country: 'italy', flag: '🇮🇹', name: 'Italy', menu: [
-      { name: 'Bruschetta', desc: 'Tomatoes, basil, olive oil', image: 'bruschetta.jpg' },
-      { name: 'Pasta Carbonara', desc: 'Guanciale, pecorino, egg yolk', image: 'pasta.jpg' },
-      { name: 'Tiramisu', desc: 'Mascarpone, savoiardi, espresso', image: 'tiramisu.jpg' }
+      { name: 'Bruschetta', desc: 'Sun-ripened tomatoes, fresh basil from the garden, and cold-pressed extra virgin olive oil on sourdough.', image: 'bruschetta.jpg' },
+      { name: 'Pasta Carbonara', desc: 'Guanciale, Pecorino Romano, organic egg yolks, and freshly cracked black pepper. No cream allowed.', image: 'pasta.jpg' },
+      { name: 'Tiramisu', desc: 'Mascarpone clouds layered with espresso-soaked savoiardi and dusted with premium dark cocoa.', image: 'tiramisu.jpg' }
     ]},
     { id: 2, country: 'india', flag: '🇮🇳', name: 'India', menu: [
-      { name: 'Samosa', desc: 'Potato filling with spices', image: 'samosa.jpg' },
-      { name: 'Butter Chicken', desc: 'Creamy tomato curry', image: 'butter-chicken.jpg' },
-      { name: 'Gulab Jamun', desc: 'Sweet milk dumplings', image: 'gulab-jamun.jpg' }
+      { name: 'Samosa', desc: 'Crispy pastry filled with spiced potatoes, peas, and aromatic herbs. Served with mint chutney.', image: 'samosa.jpg' },
+      { name: 'Butter Chicken', desc: 'Tender tandoor-grilled chicken simmered in a velvety tomato-cream sauce with fenugreek.', image: 'butter-chicken.jpg' },
+      { name: 'Gulab Jamun', desc: 'Warm milk-solid dumplings soaked in rose-scented sugar syrup. A royal ending.', image: 'gulab-jamun.jpg' }
     ]},
     { id: 3, country: 'thailand', flag: '🇹🇭', name: 'Thailand', menu: [
-      { name: 'Tom Yum', desc: 'Spicy shrimp soup', image: 'tom-yum.jpg' },
-      { name: 'Pad Thai', desc: 'Stir-fried rice noodles', image: 'pad-thai.jpg' },
-      { name: 'Mango Sticky Rice', desc: 'Sweet coconut rice', image: 'mango-sticky-rice.jpg' }
+      { name: 'Tom Yum', desc: 'Fiery and fragrant soup with prawns, lemongrass, galangal, and kaffir lime leaves.', image: 'tom-yum.jpg' },
+      { name: 'Pad Thai', desc: 'Stir-fried rice noodles with tamarind, fish sauce, crushed peanuts, and fresh lime.', image: 'pad-thai.jpg' },
+      { name: 'Mango Sticky Rice', desc: 'Sweet coconut-infused glutinous rice crowned with ripe golden mango.', image: 'mango-sticky-rice.jpg' }
     ]},
     { id: 4, country: 'georgia', flag: '🇬🇪', name: 'Georgia', menu: [
-      { name: 'Khachapuri', desc: 'Cheese-filled bread', image: 'khachapuri.jpg' },
-      { name: 'Khinkali', desc: 'Meat dumplings', image: 'khinkali.jpg' },
-      { name: 'Badrijani', desc: 'Eggplant with walnut paste', image: 'badrijani.jpg' }
+      { name: 'Khachapuri', desc: 'Boat-shaped bread filled with molten sulguni cheese and a golden egg yolk. Pure comfort.', image: 'khachapuri.jpg' },
+      { name: 'Khinkali', desc: 'Hand-twisted dumplings bursting with seasoned meat and aromatic broth. Eat with your hands.', image: 'khinkali.jpg' },
+      { name: 'Badrijani', desc: 'Silky fried eggplant rolls stuffed with spiced walnut paste and pomegranate seeds.', image: 'badrijani.jpg' }
     ]}
   ];
 
