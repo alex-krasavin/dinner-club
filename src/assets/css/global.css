@@ -25,7 +25,7 @@ body {
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text);
-  background-color: var(--color-bg-light);
+  background-color: rgba(255, 255, 255, 0.9);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -242,7 +242,7 @@ ul, ol {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgb(207 199 199 / 70%);
+  background: rgb(245 240 232 / 50%);
   backdrop-filter: var(--glass-blur) var(--glass-saturate);
   -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
   box-shadow: var(--shadow-lg);
