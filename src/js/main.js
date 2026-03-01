@@ -52,29 +52,35 @@ async function loadHeroSlides() {
 
   try {
     const slides = await getHeroSlides();
-    
+
     // Clear existing slides
     slidesWrapper.innerHTML = '';
-    
+
     // Create slides from API data
     slides.forEach((slide, index) => {
       const slideEl = document.createElement('div');
       slideEl.className = 'swiper-slide hero__slide';
       slideEl.setAttribute('data-image', slide.image);
       slideEl.style.backgroundImage = `url('${slide.image}')`;
-      
+
       slideEl.innerHTML = `
         <div class="hero__overlay"></div>
         <div class="hero__content container">
           <h1 class="hero__title">${slide.title}</h1>
           <p class="hero__subtitle">${slide.subtitle}</p>
+        </div>
+        <div class="hero__bottom">
           <a href="#booking-quiz" class="btn btn--primary btn--large">Book a Table</a>
+          <div class="hero__scroll-indicator">
+            <span class="hero__scroll-mouse"></span>
+            <span class="hero__scroll-wheel"></span>
+          </div>
         </div>
       `;
-      
+
       slidesWrapper.appendChild(slideEl);
     });
-    
+
     // Re-initialize Swiper after loading slides
     if (window.heroSwiperInstance) {
       window.heroSwiperInstance.update();
@@ -128,10 +134,6 @@ function initHeroSlider() {
       delay: 5000,
       disableOnInteraction: false,
     },
-    pagination: {
-      el: '.hero__pagination',
-      clickable: true,
-    },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -141,7 +143,7 @@ function initHeroSlider() {
       crossFade: true,
     },
   });
-  
+
   // Save instance for later updates
   window.heroSwiperInstance = heroSwiper;
 }
