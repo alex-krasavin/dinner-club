@@ -515,7 +515,7 @@ ul, ol {
 }
 
 .hero__subtitle {
-  font-size: clamp(1rem, 2vw, var(--font-size-lg));
+  font-size: clamp(1rem, 2vw, var(--font-size-2xl));
   opacity: 0.95; 
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   font-weight: 300;
@@ -1047,6 +1047,11 @@ ul, ol {
   content: '🍽️';
   font-size: 2rem;
   opacity: 0.5;
+}
+
+/* Hide ::after when image is loaded */
+.dinner-preview__item-image.loaded::after {
+  display: none;
 }
 
 .dinner-preview__item-info h4 {

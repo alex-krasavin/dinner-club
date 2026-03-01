@@ -38,7 +38,11 @@ const DINNERS_MOCK = [
     flag: '🇮🇹',
     title: 'Italian Night',
     date: '2026-03-07',
-    menu: ['Bruschetta with tomatoes and basil', 'Pasta Carbonara', 'Tiramisu'],
+    menu: [
+      { name: 'Bruschetta', desc: 'Sun-ripened tomatoes, fresh basil from the garden, and cold-pressed extra virgin olive oil on sourdough.', image: 'bruschetta.jpg' },
+      { name: 'Pasta Carbonara', desc: 'Guanciale, Pecorino Romano, organic egg yolks, and freshly cracked black pepper. No cream allowed.', image: 'pasta.jpg' },
+      { name: 'Tiramisu', desc: 'Mascarpone clouds layered with espresso-soaked savoiardi and dusted with premium dark cocoa.', image: 'tiramisu.jpg' }
+    ],
     available: true
   },
   {
@@ -47,7 +51,11 @@ const DINNERS_MOCK = [
     flag: '🇮🇳',
     title: 'Indian Spice Journey',
     date: '2026-03-08',
-    menu: ['Samosa with mint chutney', 'Butter Chicken with naan', 'Gulab Jamun'],
+    menu: [
+      { name: 'Samosa', desc: 'Crispy pastry filled with spiced potatoes, peas, and aromatic herbs. Served with mint chutney.', image: 'samosa.jpg' },
+      { name: 'Butter Chicken', desc: 'Tender tandoor-grilled chicken simmered in a velvety tomato-cream sauce with fenugreek.', image: 'butter-chicken.jpg' },
+      { name: 'Gulab Jamun', desc: 'Warm milk-solid dumplings soaked in rose-scented sugar syrup. A royal ending.', image: 'gulab-jamun.jpg' }
+    ],
     available: true
   },
   {
@@ -56,7 +64,11 @@ const DINNERS_MOCK = [
     flag: '🇹🇭',
     title: 'Thai Flavors',
     date: '2026-03-14',
-    menu: ['Tom Yum soup', 'Pad Thai with shrimp', 'Mango with sticky rice'],
+    menu: [
+      { name: 'Tom Yum', desc: 'Fiery and fragrant soup with prawns, lemongrass, galangal, and kaffir lime leaves.', image: 'tom-yum.jpg' },
+      { name: 'Pad Thai', desc: 'Stir-fried rice noodles with tamarind, fish sauce, crushed peanuts, and fresh lime.', image: 'pad-thai.jpg' },
+      { name: 'Mango Sticky Rice', desc: 'Sweet coconut-infused glutinous rice crowned with ripe golden mango.', image: 'mango-sticky-rice.jpg' }
+    ],
     available: true
   },
   {
@@ -65,7 +77,11 @@ const DINNERS_MOCK = [
     flag: '🇬🇪',
     title: 'Georgian Feast',
     date: '2026-03-15',
-    menu: ['Khachapuri Adjaruli', 'Khinkali with meat', 'Badrijani with walnut paste'],
+    menu: [
+      { name: 'Khachapuri', desc: 'Boat-shaped bread filled with molten sulguni cheese and a golden egg yolk. Pure comfort.', image: 'khachapuri.jpg' },
+      { name: 'Khinkali', desc: 'Hand-twisted dumplings bursting with seasoned meat and aromatic broth. Eat with your hands.', image: 'khinkali.jpg' },
+      { name: 'Badrijani', desc: 'Silky fried eggplant rolls stuffed with spiced walnut paste and pomegranate seeds.', image: 'badrijani.jpg' }
+    ],
     available: true
   }
 ];

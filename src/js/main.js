@@ -173,38 +173,6 @@ function initBookingQuiz() {
   const totalSteps = quizSteps.length;
   let selectedDinner = null;
 
-  // Static dinner data (will be replaced by backend API)
-  const dinnersData = [
-    {
-      id: 1,
-      country: 'italy',
-      flag: '🇮🇹',
-      title: 'Italian Night',
-      menu: ['Bruschetta with tomatoes and basil', 'Pasta Carbonara', 'Tiramisu']
-    },
-    {
-      id: 2,
-      country: 'india',
-      flag: '🇮🇳',
-      title: 'Indian Spice Journey',
-      menu: ['Samosa with mint chutney', 'Butter Chicken with naan', 'Gulab Jamun']
-    },
-    {
-      id: 3,
-      country: 'thailand',
-      flag: '🇹🇭',
-      title: 'Thai Flavors',
-      menu: ['Tom Yum soup', 'Pad Thai with shrimp', 'Mango with sticky rice']
-    },
-    {
-      id: 4,
-      country: 'georgia',
-      flag: '🇬🇪',
-      title: 'Georgian Feast',
-      menu: ['Khachapuri Adjaruli', 'Khinkali with meat', 'Badrijani with walnut paste']
-    }
-  ];
-
   // Sanitize input - allow only safe characters
   function sanitizeInput(value) {
     if (!value) return '';
@@ -242,7 +210,7 @@ function initBookingQuiz() {
     dinnerTitle.textContent = dinner.title;
     dinnerDateDisplay.textContent = formatDate(quizDateInput.value);
     dinnerMenuList.innerHTML = dinner.menu
-      .map(item => `<li>${item}</li>`)
+      .map(item => `<li>${item.name}</li>`)
       .join('');
     dinnerIdInput.value = dinner.id;
 
@@ -265,16 +233,17 @@ function initBookingQuiz() {
       placeholder.style.display = 'none';
     }
 
-    const menuItems = [
-      { name: dinner.menu[0], type: 'Starter', image: `./assets/images/dishes/${dinner.country}-1.jpg` },
-      { name: dinner.menu[1], type: 'Main Course', image: `./assets/images/dishes/${dinner.country}-2.jpg` },
-      { name: dinner.menu[2], type: 'Dessert', image: `./assets/images/dishes/${dinner.country}-3.jpg` }
-    ];
+    // Map dinner data to preview items with correct image paths
+    const menuItems = dinner.menu.map((dish, index) => ({
+      name: dish.name,
+      type: ['Starter', 'Main Course', 'Dessert'][index],
+      image: `./assets/images/dishes/${dish.image}`
+    }));
 
     previewMenu.innerHTML = menuItems.map(item => `
       <div class="dinner-preview__item">
         <div class="dinner-preview__item-image">
-          <img src="${item.image}" alt="${item.type}" loading="lazy" onerror="this.style.display='none'">
+          <img src="${item.image}" alt="${item.name}" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.style.display='none'">
         </div>
         <div class="dinner-preview__item-info">
           <h4>${item.name}</h4>
