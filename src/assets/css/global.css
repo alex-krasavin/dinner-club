@@ -1534,6 +1534,22 @@ ul, ol {
   text-align: center;
 }
 
+.footer__credits {
+  font-size: var(--font-size-xs);
+  opacity: 0.7;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer__credit-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.footer__credit-link:hover {
+  color: var(--color-primary);
+}
+
 .footer__text {
   font-size: var(--font-size-sm);
   opacity: 0.8;
