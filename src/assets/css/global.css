@@ -276,13 +276,22 @@ ul, ol {
   display: flex;
   align-items: center;
   gap: var(--spacing-xl);
-  flex: 1;
-  justify-content: center;
+  flex-grow: 1;
 }
 
 .nav__menu {
   display: flex;
-  gap: var(--spacing-xl);
+  flex-grow: 1;
+  justify-content: space-between;
+  text-wrap: nowrap;
+}
+
+.nav__menu--desktop {
+  display: flex;
+}
+
+.nav__menu--mobile {
+  display: none;
 }
 
 .nav__link {
@@ -356,15 +365,19 @@ ul, ol {
   width: 32px;
   height: 32px;
   padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 .nav__toggle-icon {
-  display: block;
+  display: inline-block;
   width: 24px;
-  height: 2px;
+  height: 3px;
   background-color: var(--color-secondary);
   position: relative;
-  transition: background-color var(--transition-base);
+  transition: background-color 0.3s ease;
 }
 
 .nav__toggle-icon::before,
@@ -372,10 +385,10 @@ ul, ol {
   content: '';
   position: absolute;
   left: 0;
-  width: 24px;
-  height: 2px;
+  width: 100%;
+  height: 3px;
   background-color: var(--color-secondary);
-  transition: transform var(--transition-base);
+  transition: transform 0.3s ease;
 }
 
 .nav__toggle-icon::before {
@@ -384,6 +397,21 @@ ul, ol {
 
 .nav__toggle-icon::after {
   top: 7px;
+}
+
+/* Burger to X animation */
+.nav__toggle.active .nav__toggle-icon {
+  background-color: transparent;
+}
+
+.nav__toggle.active .nav__toggle-icon::before {
+  transform: translateY(7px) rotate(45deg);
+  /* background-color: #fff; */
+}
+
+.nav__toggle.active .nav__toggle-icon::after {
+  transform: translateY(-7px) rotate(-45deg);
+  /* background-color: #fff; */
 }
 
 /* ========================
@@ -414,7 +442,7 @@ ul, ol {
 }
 
 .swiper-wrapper {
-  transform: translate3d(0px, 85px, 0)
+  transform: translate3d(0px, 82px, 0)
 }
 
 /* Background images are set dynamically via JavaScript from API data */
@@ -1558,6 +1586,19 @@ ul, ol {
 /* ========================
    Responsive Design
    ======================== */
+@media (max-width:1080px) {
+  .nav__social {
+    display: none;
+  }
+
+  .nav__center {
+    justify-content: center;
+  }
+
+  .nav__menu {
+    justify-content: space-around;
+  } 
+}
 @media (max-width: 1024px) {
   .booking-quiz__card {
     max-width: 100%;
@@ -1636,43 +1677,70 @@ ul, ol {
     display: flex;
   }
 
-  .nav__btn {
+  .nav__menu--desktop {
     display: none;
   }
 
-  .nav__menu {
+  .nav__menu--mobile {
+    display: flex;
     position: fixed;
-    top: 70px;
+    top: 80px;
     left: 0;
     width: 100%;
-    background-color: var(--color-bg-white);
+    height: 100vh;
+    background: var(--color-secondary);
     flex-direction: column;
-    padding: var(--spacing-xl);
-    gap: var(--spacing-md);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-100%);
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-2xl);
+    transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
-    transition: all var(--transition-base);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
   }
 
-  .nav__menu--active {
-    transform: translateY(0);
+  .nav__menu--mobile.nav__menu--active {
+    transform: translateX(0);
     opacity: 1;
     visibility: visible;
   }
 
-  .quiz-step__options {
-    grid-template-columns: 1fr;
+  .nav__menu--mobile .nav__item {
+    width: 100%;
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
-  .dish-card__image {
-    height: 200px;
+  .nav__menu--mobile.nav__menu--active .nav__item {
+    transform: translateY(0);
+    opacity: 1;
   }
 
-  .hero__arrow {
-    display: none;
+  .nav__menu--mobile.nav__menu--active .nav__item:nth-child(1) { transition-delay: 0.1s; }
+  .nav__menu--mobile.nav__menu--active .nav__item:nth-child(2) { transition-delay: 0.15s; }
+  .nav__menu--mobile.nav__menu--active .nav__item:nth-child(3) { transition-delay: 0.2s; }
+  .nav__menu--mobile.nav__menu--active .nav__item:nth-child(4) { transition-delay: 0.25s; }
+  .nav__menu--mobile.nav__menu--active .nav__item:nth-child(5) { transition-delay: 0.3s; }
+
+  .nav__menu--mobile .nav__link {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    color: rgba(255, 255, 255, 0.9);
+    transition: color var(--transition-base);
   }
+
+  .nav__menu--mobile .nav__link:hover {
+    color: var(--color-primary);
+  }
+}
+
+/* Body scroll lock */
+body.menu-open {
+  overflow: hidden;
 }
 
 @media (max-width: 480px) {
@@ -1687,5 +1755,9 @@ ul, ol {
   .menu__tab {
     padding: var(--spacing-sm) var(--spacing-lg);
     font-size: var(--font-size-sm);
+  }
+
+  .nav__btn {
+    display: none;
   }
 }

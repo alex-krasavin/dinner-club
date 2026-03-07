@@ -93,35 +93,38 @@ async function loadHeroSlides() {
 // ===== Mobile Menu Toggle =====
 function initMobileMenu() {
   const navToggle = document.getElementById('nav-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  
+  const navMenu = document.getElementById('nav-menu-mobile');
+  const navLinks = navMenu ? navMenu.querySelectorAll('.nav__link') : [];
+
   if (!navToggle || !navMenu) return;
-  
+
+  // Toggle menu
   navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
     navMenu.classList.toggle('nav__menu--active');
-    
-    // Animate toggle icon
-    const icon = navToggle.querySelector('.nav__toggle-icon');
-    if (navMenu.classList.contains('nav__menu--active')) {
-      icon.style.backgroundColor = 'transparent';
-      icon.style.transform = 'rotate(45deg)';
-      icon.style.top = '0';
-    } else {
-      icon.style.backgroundColor = '';
-      icon.style.transform = '';
-      icon.style.top = '';
-    }
+    document.body.classList.toggle('menu-open');
   });
-  
+
   // Close menu on link click
-  navMenu.querySelectorAll('.nav__link').forEach(link => {
+  navLinks.forEach(link => {
     link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
       navMenu.classList.remove('nav__menu--active');
-      const icon = navToggle.querySelector('.nav__toggle-icon');
-      icon.style.backgroundColor = '';
-      icon.style.transform = '';
-      icon.style.top = '';
+      document.body.classList.remove('menu-open');
     });
+  });
+
+  // Close menu on resize (prevent bug when menu stays open on desktop)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth > 768) {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('nav__menu--active');
+        document.body.classList.remove('menu-open');
+      }
+    }, 100);
   });
 }
 
