@@ -466,7 +466,7 @@ ul, ol {
 .hero__content {
   position: relative;
   z-index: 10;  
-  min-height: 60vh;
+  min-height: 70vh;
   text-align: center;
   color: #fff;
   padding: var(--spacing-2xl);
@@ -1615,20 +1615,25 @@ ul, ol {
   }
 
   .hero__arrow.swiper-button-prev {
-    left: 15px;
+    left: -15px;
   }
 
   .hero__arrow.swiper-button-next {
-    right: 15px;
+    right: -15px;
   }
 }
 
 @media (max-width: 768px) {
+
   .hero__bottom {
     bottom: var(--spacing-lg);
   }
 
   .hero__scroll-indicator {
+    display: none;
+  }
+
+  .hero__arrow {
     display: none;
   }
 
